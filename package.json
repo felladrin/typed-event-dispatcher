@@ -1,6 +1,6 @@
 {
   "name": "typed-event-dispatcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched by using getters.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
