@@ -1,12 +1,20 @@
 {
   "name": "typed-event-dispatcher",
   "version": "1.0.0",
-  "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched.",
+  "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched by using getters.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "license.txt",
+    "package.json",
+    "readme.md"
+  ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "preview-package-contents": "npm pack --dry-run"
   },
   "keywords": [
     "event",
@@ -17,7 +25,7 @@
     "typed",
     "typescript"
   ],
-  "repository": "felladrin/typed-event-dispatcher",
+  "repository": "github:felladrin/typed-event-dispatcher",
   "author": {
     "name": "Victor Nogueira",
     "email": "victor@victornogueira.app",
