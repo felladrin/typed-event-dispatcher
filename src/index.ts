@@ -1,13 +1,27 @@
 type TypedEventListener<T> = (data?: T) => void;
 
-export abstract class TypedEvent<T = void> {
-  protected listeners: Array<TypedEventListener<T>> = [];
-  protected oneTimeListeners: Array<TypedEventListener<T>> = [];
+export type TypedEvent<T = void> = {
+  addListener(listener: TypedEventListener<T>, listenOnlyOnce?:boolean): void;
+  removeListener(listener: TypedEventListener<T>): void;
+}
 
-  public addListener(
-    listener: TypedEventListener<T>,
-    listenOnlyOnce = false
-  ): void {
+export class TypedEventDispatcher<T = void> {
+  private readonly listeners: Array<TypedEventListener<T>> = [];
+  private readonly oneTimeListeners: Array<TypedEventListener<T>> = [];
+
+  public get getter(): TypedEvent<T> {
+    const typedEvent:TypedEvent<T> = {
+      addListener: this.addListener,
+      removeListener: this.removeListener
+    };
+    Object.defineProperties(typedEvent, {
+      listeners: { value: this.listeners },
+      oneTimeListeners: { value: this.oneTimeListeners }
+    });
+    return typedEvent;
+  }
+
+  public addListener(listener: TypedEventListener<T>, listenOnlyOnce = false): void {
     this.listeners.push(listener);
     if (listenOnlyOnce) {
       this.oneTimeListeners.push(listener);
@@ -15,26 +29,29 @@ export abstract class TypedEvent<T = void> {
   }
 
   public removeListener(listener: TypedEventListener<T>): void {
-    this.listeners = this.listeners.filter(item => item != listener);
-  }
-}
-
-export class TypedEventDispatcher<T = void> extends TypedEvent<T> {
-  public get getter(): TypedEvent<T> {
-    return this as TypedEvent<T>;
+    const indexOfListener = this.listeners.indexOf(listener);
+    if (indexOfListener >= 0) {
+      this.listeners.splice(indexOfListener, 1);
+    }
   }
 
   public dispatch(data?: T): void {
-    for (const listener of this.listeners) {
-      listener.call(listener, data);
-    }
+    this.callListeners(data);
     this.wipeOneTimeListeners();
   }
 
+  private callListeners(data?: T): void {
+    for (const listener of this.listeners) {
+      listener.call(listener, data);
+    }
+  }
+
   private wipeOneTimeListeners(): void {
-    this.listeners = this.listeners.filter(
-      item => this.oneTimeListeners.indexOf(item) == -1
-    );
-    this.oneTimeListeners = [];
+    while (this.oneTimeListeners.length > 0) {
+      const listener = this.oneTimeListeners.pop();
+      if (listener) {
+        this.removeListener(listener);
+      }
+    }
   }
 }
