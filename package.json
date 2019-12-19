@@ -5,14 +5,15 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src",
+    "dist/index*",
+    "src/index.ts",
     "license.txt",
     "package.json",
     "readme.md"
   ],
   "scripts": {
     "build": "tsc",
+    "test": "jest",
     "prepare": "npm run build",
     "preview-package-contents": "npm pack --dry-run"
   },
@@ -33,6 +34,9 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^24.0.24",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
   }
 }
