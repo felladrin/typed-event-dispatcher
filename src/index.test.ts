@@ -1,4 +1,4 @@
-import {TypedEvent, TypedEventDispatcher} from "./index";
+import {TypedEventDispatcher} from "./index";
 
 type Player = {
     name: string;
@@ -12,10 +12,21 @@ class App {
     private onDebugModeToggledDispatcher = new TypedEventDispatcher<boolean>();
     private onPlayerConnectedDispatcher = new TypedEventDispatcher<Player>();
 
-    public get onServerStarted() { return this.onServerStartedDispatcher.getter; }
-    public get onPlayersCountUpdated() { return this.onPlayersCountUpdatedDispatcher.getter; }
-    public get onDebugModeToggled() { return this.onDebugModeToggledDispatcher.getter; }
-    public get onPlayerConnected() { return this.onPlayerConnectedDispatcher.getter; }
+    public get onServerStarted() {
+        return this.onServerStartedDispatcher.getter;
+    }
+
+    public get onPlayersCountUpdated() {
+        return this.onPlayersCountUpdatedDispatcher.getter;
+    }
+
+    public get onDebugModeToggled() {
+        return this.onDebugModeToggledDispatcher.getter;
+    }
+
+    public get onPlayerConnected() {
+        return this.onPlayerConnectedDispatcher.getter;
+    }
 
     public dispatchServerStarted() {
         this.onServerStartedDispatcher.dispatch();
@@ -34,6 +45,16 @@ class App {
     }
 }
 
+function pickRandomIntInclusive(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function repeatFunction(fn: () => void, times: number): void {
+    for (let i = 0; i < times; i++) fn();
+}
+
 let app: App;
 let listener: jest.Mock;
 
@@ -42,7 +63,7 @@ beforeEach(() => {
     listener = jest.fn();
 });
 
-test('app getters should not be null after its construction', () => {
+test('app getters should not be null after app construction', () => {
     expect(app.onServerStarted).not.toBeNull();
     expect(app.onPlayersCountUpdated).not.toBeNull();
     expect(app.onDebugModeToggled).not.toBeNull();
@@ -51,35 +72,42 @@ test('app getters should not be null after its construction', () => {
 
 test('addListener() called without the second parameter should call the listener more than once, when the event is dispatched more than once', () => {
     app.onServerStarted.addListener(listener);
-    app.dispatchServerStarted();
-    app.dispatchServerStarted();
-    app.dispatchServerStarted();
-    expect(listener).toBeCalledTimes(3);
+    const times = pickRandomIntInclusive(2, 5);
+    repeatFunction(() => {
+        app.dispatchServerStarted();
+    }, times);
+    expect(listener).toBeCalledTimes(times);
 });
 
 test('addListener() called with the second parameter set to "false" should call the listener more than once, when the event is dispatched more than once', () => {
     app.onServerStarted.addListener(listener, false);
-    app.dispatchServerStarted();
-    app.dispatchServerStarted();
-    app.dispatchServerStarted();
-    expect(listener).toBeCalledTimes(3);
+    const times = pickRandomIntInclusive(2, 5);
+    repeatFunction(() => {
+        app.dispatchServerStarted();
+    }, times);
+    expect(listener).toBeCalledTimes(times);
 });
 
 test('addListener() called with the second parameter set to "true" should call the listener only once, when the event is dispatched more than once', () => {
     app.onServerStarted.addListener(listener, true);
-    app.dispatchServerStarted();
-    app.dispatchServerStarted();
-    app.dispatchServerStarted();
+    const times = pickRandomIntInclusive(2, 5);
+    repeatFunction(() => {
+        app.dispatchServerStarted();
+    }, times);
     expect(listener).toBeCalledTimes(1);
 });
 
 test("removeListener() should remove the listener, so next time the event is dispatched, it won't call the listener", () => {
     app.onServerStarted.addListener(listener);
-    app.dispatchServerStarted();
-    app.dispatchServerStarted();
+    const times = pickRandomIntInclusive(2, 5);
+    repeatFunction(() => {
+        app.dispatchServerStarted();
+    }, times);
     app.onServerStarted.removeListener(listener);
-    app.dispatchServerStarted();
-    expect(listener).toBeCalledTimes(2);
+    repeatFunction(() => {
+        app.dispatchServerStarted();
+    }, pickRandomIntInclusive(1, 5));
+    expect(listener).toBeCalledTimes(times);
 });
 
 test("removeListener() should be executed with no problem if listener wasn't find in the list of current registered listeners", () => {
@@ -115,7 +143,7 @@ test("should pass the correct parameters to the listener when the event dispatch
     expect(listener.mock.calls).toEqual([[32]]);
 });
 
-test("should pass the correct parameters to the listener when the event dispatches a cutom type", () => {
+test("should pass the correct parameters to the listener when the event dispatches a custom type", () => {
     app.onPlayerConnected.addListener(listener);
     app.dispatchPlayerConnected();
     expect(listener.mock.calls).toEqual([[{name: "TS", level: 7, isAlive: true}]]);
