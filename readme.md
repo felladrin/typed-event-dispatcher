@@ -73,7 +73,7 @@ Now, whenever it's time, `dispatch()` the events!
 this.onServerStartedDispatcher.dispatch();
 this.onPlayersCountUpdatedDispatcher.dispatch(32);
 this.onDebugModeToggledDispatcher.dispatch(true);
-this.onPlayerConnectedDispatcher.dispatch({name: "TS", level: "7", isAlive: true});
+this.onPlayerConnectedDispatcher.dispatch({name: "TS", level: 7, isAlive: true});
 ```
 
 ## Quick Example (TypeScript)
