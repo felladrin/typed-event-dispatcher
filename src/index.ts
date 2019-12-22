@@ -48,10 +48,8 @@ export class TypedEventDispatcher<T = void> {
 
   private wipeOneTimeListeners(): void {
     while (this.oneTimeListeners.length > 0) {
-      const listener = this.oneTimeListeners.pop();
-      if (listener) {
-        this.removeListener(listener);
-      }
+      const listener = this.oneTimeListeners.pop() as TypedEventListener<T>;
+      this.removeListener(listener);
     }
   }
 }
