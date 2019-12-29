@@ -86,7 +86,7 @@ this.onDebugModeToggledDispatcher.dispatch(true);
 this.onPlayerConnectedDispatcher.dispatch({name: "TS", level: 7, isAlive: true});
 ```
 
-## Quick Example (TypeScript)
+## Quick TypeScript Example
 
 ```typescript
 import { TypedEventDispatcher } from "typed-event-dispatcher";
@@ -120,45 +120,9 @@ class App {
 new App().start();
 ```
 
-## Quick Example (JavaScript)
+## It also works with pure JavaScript!
 
-You can paste this one on [RunKit](https://npm.runkit.com/typed-event-dispatcher) to see it in action!
-
-```javascript
-const { TypedEventDispatcher } = require("typed-event-dispatcher")
-
-class Counter {
-    constructor() {
-        this.count = 0;
-        this.onCountUpdatedDispatcher = new TypedEventDispatcher();
-    }
-    
-    get onCountUpdated() {
-        return this.onCountUpdatedDispatcher.getter;
-    }
-    
-    start() {
-        setInterval(() => {
-            this.onCountUpdatedDispatcher.dispatch(++this.count);
-        }, 1000);
-    }
-}
-
-class App {
-    constructor() {
-        this.counter = new Counter();
-    }
-    
-    start() {
-        this.counter.onCountUpdated.addListener((count) => {
-            console.log(`Count updated to ${count}`);
-        });
-        this.counter.start();
-    }
-}
-
-new App().start();
-```
+[Check the same code above, converted to JavaScript, on RunKit](https://runkit.com/felladrin/typed-event-dispatcher).
 
 ## License
 
