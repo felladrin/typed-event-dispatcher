@@ -10,43 +10,144 @@
 
 A solution for strongly-typed events that can be publicly listened but internally-only dispatched by using getters.
 
-Works on Node.js and the browsers. Intended to be used with Typescript, but can also be used with vanilla JavaScript.
+Made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases. Works on Node.js and the browsers.
 
-## Installation
+## Getting Started
 
 ```shell script
-$ npm install typed-event-dispatcher
+npm install typed-event-dispatcher
+```
+
+```typescript
+import { TypedEventDispatcher } from "typed-event-dispatcher";
+
+class Counter {
+  // STEP 1: Create a private event dispatcher.
+  private onCountIncreasedDispatcher = new TypedEventDispatcher<number>();
+
+  // STEP 2: Create a public event getter.
+  public get onCountIncreased() {
+    return this.onCountIncreasedDispatcher.getter;
+  }
+
+  public increaseCountOncePerSecond() {
+    setInterval(() => {
+      this.increaseCount();
+
+      // STEP 3: Dispatch the event so listeners can react to it.
+      this.onCountIncreasedDispatcher.dispatch(this.count);
+    }, 1000);
+  }
+
+  private count = 0;
+
+  private increaseCount() {
+    this.count++;
+  }
+}
+
+class Example {
+  private counter = new Counter();
+
+  public start() {
+    console.log("Starting count...");
+
+    // STEP 4: Listen to events dispatched by other classes.
+    this.counter.onCountIncreased.addListener(count => {
+      console.log(`Count increased to ${count}.`);
+    });
+
+    this.counter.increaseCountOncePerSecond();
+  }
+}
+
+new Example().start();
 ```
 
 ## Usage Overview
 
-Define private events on your class, with or without data-passthroughs:
+Define private event dispatchers on your class, with or without data-passthroughs, like this:
 
 ```typescript
-private onServerStartedDispatcher = new TypedEventDispatcher();
-private onPlayersCountUpdatedDispatcher = new TypedEventDispatcher<number>();
-private onDebugModeToggledDispatcher = new TypedEventDispatcher<boolean>();
+class ServerExample {
+  // Passing no data, just informing the event happened:
+  private onStartedDispatcher = new TypedEventDispatcher();
+
+  // Passing a number along with the event:
+  private onPlayersCountUpdatedDispatcher = new TypedEventDispatcher<number>();
+
+  // Passing a boolean:
+  private onDebugModeToggledDispatcher = new TypedEventDispatcher<boolean>();
+}
 ```
 
 If you need to pass several data with your event, define a custom data type:
 
 ```typescript
 type Player = {
-    name: string;
-    level: number;
-    isAlive: boolean;
+  name: string;
+  level: number;
+  isAlive: boolean;
 };
-private onPlayerConnectedDispatcher = new TypedEventDispatcher<Player>();
+
+class ServerExample {
+  // Passing the complete player info along with the event:
+  private onPlayerConnectedDispatcher = new TypedEventDispatcher<Player>();
+}
 ```
 
-Then create public getters for your events, so you'll expose only the `addListener()` and `removeListener()` methods.
-You don't need to declare the return type of the getters, as TypeScript resolves it automatically.
+Then, on the same class, create public getters for your events,
+by returning the `getter` property from a dispatcher.  
+The getters expose only two methods: `addListener()` and `removeListener()`.  
+And you don't need to declare the return type of the getters,
+as TypeScript resolves it automatically.
 
 ```typescript
-public get onServerStarted() { return this.onServerStartedDispatcher.getter; }
-public get onPlayersCountUpdated() { return this.onPlayersCountUpdatedDispatcher.getter; }
-public get onDebugModeToggled() { return this.onDebugModeToggledDispatcher.getter; }
-public get onPlayerConnected() { return this.onPlayerConnectedDispatcher.getter; }
+class ServerExample {
+  public get onStarted() {
+    return this.onStartedDispatcher.getter;
+  }
+
+  public get onPlayersCountUpdated() {
+    return this.onPlayersCountUpdatedDispatcher.getter;
+  }
+
+  public get onDebugModeToggled() {
+    return this.onDebugModeToggledDispatcher.getter;
+  }
+
+  public get onPlayerConnected() {
+    return this.onPlayerConnectedDispatcher.getter;
+  }
+}
+```
+
+Finally, `dispatch()` the events when some action occurs!  
+Usually we do it at the end of the class methods, so other
+classes react after those actions.
+
+```typescript
+class ServerExample {
+  private start() {
+    // (...)
+    this.onStartedDispatcher.dispatch();
+  }
+
+  private updateStats() {
+    // (...)
+    this.onPlayersCountUpdatedDispatcher.dispatch(32);
+  }
+
+  private toggleDebugMode() {
+    // (...)
+    this.onDebugModeToggledDispatcher.dispatch(true);
+  }
+
+  private registerPlayer(player: Player) {
+    // (...)
+    this.onPlayerConnectedDispatcher.dispatch(player);
+  }
+}
 ```
 
 On other classes, start listening to those events.
@@ -54,75 +155,39 @@ The callback parameters are also auto-resolved by TypeScript,
 based on the type of the event. So you don't need to declare them.
 
 ```typescript
-this.server.onServerStarted.addListener(() => console.log("Server started!"));
+class AppExample {
+  // A private variable holding an instance of the other class that dispatchers events:
+  private server: ServerExample;
 
-this.server.onPlayersCountUpdated.addListener(playersCount => {
-    spawnEnemiesBasedOnPlayersCount(playersCount);
-    if (playersCount > playersCountRecord) {
+  public registerListeners() {
+    // The event 'onStarted' passes no data, so the listener has no arguments:
+    this.server.onStarted.addListener(() => console.log("Server started!"));
+
+    // But 'onPlayersCountUpdated' passes a number, so the listener has one argument to hold it:
+    this.server.onPlayersCountUpdated.addListener(playersCount => {
+      spawnEnemiesBasedOnPlayersCount(playersCount);
+      if (playersCount > playersCountRecord) {
         registerNewPlayersCountRecord(playersCount);
-    }
-});
+      }
+    });
 
-this.server.onDebugModeToggled.addListener(isDebugModeActive => {
-    debug(`Debug Mode set to ${isDebugModeActive}.`);
-    if (isDebugModeActive) {
-        debug("Messages using debug(<message>) will now be displayed on console.");
-    }
-});
+    // And the listener for 'onDebugModeToggled' also has an argument, holding the boolean passed:
+    this.server.onDebugModeToggled.addListener(isDebugModeActive => {
+      debug(`Debug Mode set to ${isDebugModeActive}.`);
+      if (isDebugModeActive) {
+        debug("Messages using debug() will now be displayed on console.");
+      }
+    });
 
-this.server.onPlayerConnected.addListener(player => {
-    addToGlobalChat(player);
-    createCustomQuests(player);
-    prepareRandomEncounters(player);
-});
-```
-
-Now, whenever it's time, `dispatch()` the events!
-
-```typescript
-this.onServerStartedDispatcher.dispatch();
-this.onPlayersCountUpdatedDispatcher.dispatch(32);
-this.onDebugModeToggledDispatcher.dispatch(true);
-this.onPlayerConnectedDispatcher.dispatch({name: "TS", level: 7, isAlive: true});
-```
-
-## Quick TypeScript Example
-
-```typescript
-import { TypedEventDispatcher } from "typed-event-dispatcher";
-
-class Counter {
-    private count = 0;
-    private onCountUpdatedDispatcher = new TypedEventDispatcher<number>();
-
-    public get onCountUpdated() {
-        return this.onCountUpdatedDispatcher.getter;
-    }
-
-    public start() {
-        setInterval(() => {    
-            this.onCountUpdatedDispatcher.dispatch(++this.count);
-        }, 1000);
-    }
+    // Same story for 'onPlayerConnected', which passes the player info:
+    this.server.onPlayerConnected.addListener(player => {
+      addToGlobalChat(player);
+      createCustomQuests(player);
+      prepareRandomEncounters(player);
+    });
+  }
 }
-
-class App {
-    private counter = new Counter();
-
-    public start() {
-        this.counter.onCountUpdated.addListener((count) => {
-            console.log(`Count updated to ${count}`);
-        });
-        this.counter.start();
-    }
-}
-
-new App().start();
 ```
-
-## It also works with pure JavaScript!
-
-[Check the same code above, converted to JavaScript, on RunKit](https://runkit.com/felladrin/typed-event-dispatcher).
 
 ## License
 
