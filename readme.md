@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/typed-event-dispatcher.svg?style=flat)](https://www.npmjs.org/package/typed-event-dispatcher)
 [![npm downloads](https://img.shields.io/npm/dm/typed-event-dispatcher.svg?style=flat)](http://npm-stat.com/charts.html?package=typed-event-dispatcher)
-[![Build Status](https://travis-ci.com/felladrin/typed-event-dispatcher.svg?branch=master)](https://travis-ci.com/felladrin/typed-event-dispatcher)
+[![Build Status](https://img.shields.io/github/workflow/status/felladrin/typed-event-dispatcher/Build%20and%20Test)](https://github.com/felladrin/typed-event-dispatcher/actions?query=workflow%3A%22Build+and+Test%22)
 [![Coverage Status](https://coveralls.io/repos/github/felladrin/typed-event-dispatcher/badge.svg?branch=master)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
 [![David](https://img.shields.io/david/felladrin/typed-event-dispatcher)](https://david-dm.org/felladrin/typed-event-dispatcher)
 [![install size](https://packagephobia.now.sh/badge?p=typed-event-dispatcher)](https://packagephobia.now.sh/result?p=typed-event-dispatcher)
