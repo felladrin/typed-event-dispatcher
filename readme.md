@@ -166,20 +166,26 @@ based on the type of the event. So you don't need to declare them.
 ```typescript
 class AppExample
 {
-  // A private variable holding an
-  // instance of the other class:
+  //-------------------------------//
+  // A private variable holding an //
+  // instance of the other class:  //
+  //-------------------------------//
   private server: ServerExample;
 
   public registerListeners()
   {
-    // The event 'onStarted' passes no data,
-    // so the listener has no arguments:
+    //---------------------------------------//
+    // The event 'onStarted' passes no data, //
+    // so the listener has no arguments:     //
+    //---------------------------------------//
     this.server.onStarted.addListener(() => {
       console.log("Server started!")
     });
 
-    // But 'onPlayersCountUpdated' passes a number,
-    // so the listener has one argument to hold it:
+    //----------------------------------------------//
+    // But 'onPlayersCountUpdated' passes a number, //
+    // so the listener has one argument to hold it: //
+    //----------------------------------------------//
     this.server.onPlayersCountUpdated.addListener(playersCount => {
       spawnEnemiesBasedOnPlayersCount(playersCount);
 
@@ -188,8 +194,10 @@ class AppExample
       }
     });
 
-    // And the listener for 'onDebugModeToggled' also
-    // has an argument, holding the boolean passed:
+    //------------------------------------------------//
+    // And the listener for 'onDebugModeToggled' also //
+    // has an argument, holding the boolean passed:   //
+    //------------------------------------------------//
     this.server.onDebugModeToggled.addListener(isDebugModeActive => {
       debug(`Debug Mode set to ${isDebugModeActive}.`);
 
@@ -198,8 +206,10 @@ class AppExample
       }
     });
 
-    // Same story for 'onPlayerConnected',
-    // which passes the player info:
+    //-------------------------------------//
+    // Same story for 'onPlayerConnected', //
+    // which passes the player info:       //
+    //-------------------------------------//
     this.server.onPlayerConnected.addListener(player => {
       addToGlobalChat(player);
       createCustomQuests(player);
