@@ -3,9 +3,11 @@ on:
   push:
     paths:
     - '**.ts'
+    - 'package*json'
   pull_request:
     paths:
     - '**.ts'
+    - 'package*json'
 jobs:
   run:
     name: Node.js v${{ matrix.node }} on ${{ matrix.os }}
