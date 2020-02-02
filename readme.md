@@ -1,11 +1,10 @@
 # Typed Event Dispatcher
 
 [![npm version](https://img.shields.io/npm/v/typed-event-dispatcher.svg?style=flat)](https://www.npmjs.org/package/typed-event-dispatcher)
-[![npm downloads](https://img.shields.io/npm/dm/typed-event-dispatcher.svg?style=flat)](http://npm-stat.com/charts.html?package=typed-event-dispatcher)
 [![Build Status](https://img.shields.io/github/workflow/status/felladrin/typed-event-dispatcher/Build%20and%20Test)](https://github.com/felladrin/typed-event-dispatcher/actions?query=workflow%3A%22Build+and+Test%22)
-[![Coverage Status](https://coveralls.io/repos/github/felladrin/typed-event-dispatcher/badge.svg?branch=master)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/github/felladrin/typed-event-dispatcher)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
 [![David](https://img.shields.io/david/felladrin/typed-event-dispatcher)](https://david-dm.org/felladrin/typed-event-dispatcher)
-[![install size](https://packagephobia.now.sh/badge?p=typed-event-dispatcher)](https://packagephobia.now.sh/result?p=typed-event-dispatcher)
+[![npm downloads](https://img.shields.io/npm/dm/typed-event-dispatcher.svg?style=flat)](http://npm-stat.com/charts.html?package=typed-event-dispatcher)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/typed-event-dispatcher)](https://bundlephobia.com/result?p=typed-event-dispatcher)
 
 A solution for strongly-typed events that can be publicly listened but internally-only dispatched by using getters.
@@ -22,10 +21,14 @@ npm install typed-event-dispatcher
 import { TypedEventDispatcher } from "typed-event-dispatcher";
 
 class Counter {
-  // STEP 1: Create a private event dispatcher.
+  //--------------------------------------------//
+  // STEP 1: Create a private event dispatcher. //
+  //--------------------------------------------//
   private onCountIncreasedDispatcher = new TypedEventDispatcher<number>();
 
-  // STEP 2: Create a public event getter.
+  //---------------------------------------//
+  // STEP 2: Create a public event getter. //
+  //---------------------------------------//
   public get onCountIncreased() {
     return this.onCountIncreasedDispatcher.getter;
   }
@@ -34,7 +37,9 @@ class Counter {
     setInterval(() => {
       this.increaseCount();
 
-      // STEP 3: Dispatch the event so listeners can react to it.
+      //----------------------------------------------------------//
+      // STEP 3: Dispatch the event so listeners can react to it. //
+      //----------------------------------------------------------//
       this.onCountIncreasedDispatcher.dispatch(this.count);
     }, 1000);
   }
@@ -52,7 +57,9 @@ class Example {
   public start() {
     console.log("Starting count...");
 
-    // STEP 4: Listen to events dispatched by other classes.
+    //-------------------------------------------------------//
+    // STEP 4: Listen to events dispatched by other classes. //
+    //-------------------------------------------------------//
     this.counter.onCountIncreased.addListener(count => {
       console.log(`Count increased to ${count}.`);
     });
@@ -69,7 +76,8 @@ new Example().start();
 Define private event dispatchers on your class, with or without data-passthroughs, like this:
 
 ```typescript
-class ServerExample {
+class ServerExample
+{
   // Passing no data, just informing the event happened:
   private onStartedDispatcher = new TypedEventDispatcher();
 
@@ -90,7 +98,8 @@ type Player = {
   isAlive: boolean;
 };
 
-class ServerExample {
+class ServerExample
+{
   // Passing the complete player info along with the event:
   private onPlayerConnectedDispatcher = new TypedEventDispatcher<Player>();
 }
@@ -155,31 +164,42 @@ The callback parameters are also auto-resolved by TypeScript,
 based on the type of the event. So you don't need to declare them.
 
 ```typescript
-class AppExample {
-  // A private variable holding an instance of the other class that dispatchers events:
+class AppExample
+{
+  // A private variable holding an
+  // instance of the other class:
   private server: ServerExample;
 
-  public registerListeners() {
-    // The event 'onStarted' passes no data, so the listener has no arguments:
-    this.server.onStarted.addListener(() => console.log("Server started!"));
+  public registerListeners()
+  {
+    // The event 'onStarted' passes no data,
+    // so the listener has no arguments:
+    this.server.onStarted.addListener(() => {
+      console.log("Server started!")
+    });
 
-    // But 'onPlayersCountUpdated' passes a number, so the listener has one argument to hold it:
+    // But 'onPlayersCountUpdated' passes a number,
+    // so the listener has one argument to hold it:
     this.server.onPlayersCountUpdated.addListener(playersCount => {
       spawnEnemiesBasedOnPlayersCount(playersCount);
+
       if (playersCount > playersCountRecord) {
         registerNewPlayersCountRecord(playersCount);
       }
     });
 
-    // And the listener for 'onDebugModeToggled' also has an argument, holding the boolean passed:
+    // And the listener for 'onDebugModeToggled' also
+    // has an argument, holding the boolean passed:
     this.server.onDebugModeToggled.addListener(isDebugModeActive => {
       debug(`Debug Mode set to ${isDebugModeActive}.`);
+
       if (isDebugModeActive) {
         debug("Messages using debug() will now be displayed on console.");
       }
     });
 
-    // Same story for 'onPlayerConnected', which passes the player info:
+    // Same story for 'onPlayerConnected',
+    // which passes the player info:
     this.server.onPlayerConnected.addListener(player => {
       addToGlobalChat(player);
       createCustomQuests(player);
@@ -191,5 +211,4 @@ class AppExample {
 
 ## License
 
-The MIT License  
-<http://victor.mit-license.org>
+[The MIT License](http://victor.mit-license.org)
