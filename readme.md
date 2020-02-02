@@ -7,9 +7,11 @@
 [![npm downloads](https://img.shields.io/npm/dm/typed-event-dispatcher.svg?style=flat)](http://npm-stat.com/charts.html?package=typed-event-dispatcher)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/typed-event-dispatcher)](https://bundlephobia.com/result?p=typed-event-dispatcher)
 
-A solution for strongly-typed events that can be publicly listened but internally-only dispatched by using getters.
+A solution for strongly-typed events that can be publicly listened but internally-only dispatched.
 
-Made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases. Works on Node.js and the browsers.
+Made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
+
+Works on Node.js and Browsers.
 
 ## Getting Started
 
@@ -168,7 +170,7 @@ class AppExample
 {
   //-------------------------------//
   // A private variable holding an //
-  // instance of the other class:  //
+  // instance of the other class.  //
   //-------------------------------//
   private server: ServerExample;
 
@@ -176,7 +178,7 @@ class AppExample
   {
     //---------------------------------------//
     // The event 'onStarted' passes no data, //
-    // so the listener has no arguments:     //
+    // so the listener has no arguments.     //
     //---------------------------------------//
     this.server.onStarted.addListener(() => {
       console.log("Server started!")
@@ -184,7 +186,7 @@ class AppExample
 
     //----------------------------------------------//
     // But 'onPlayersCountUpdated' passes a number, //
-    // so the listener has one argument to hold it: //
+    // so the listener has one argument to hold it. //
     //----------------------------------------------//
     this.server.onPlayersCountUpdated.addListener(playersCount => {
       spawnEnemiesBasedOnPlayersCount(playersCount);
@@ -196,7 +198,7 @@ class AppExample
 
     //------------------------------------------------//
     // And the listener for 'onDebugModeToggled' also //
-    // has an argument, holding the boolean passed:   //
+    // has an argument, holding the boolean passed.   //
     //------------------------------------------------//
     this.server.onDebugModeToggled.addListener(isDebugModeActive => {
       debug(`Debug Mode set to ${isDebugModeActive}.`);
@@ -208,7 +210,7 @@ class AppExample
 
     //-------------------------------------//
     // Same story for 'onPlayerConnected', //
-    // which passes the player info:       //
+    // which passes the player info.       //
     //-------------------------------------//
     this.server.onPlayerConnected.addListener(player => {
       addToGlobalChat(player);
