@@ -3,16 +3,14 @@ FROM node:12
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
-# The node image includes a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+# Set data for non-root user creation
 ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Configure apt and install packages
+# Update packages lists
 RUN apt-get update \
+  # Install utils
   && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \ 
   #
   # Verify git and needed tools are installed
