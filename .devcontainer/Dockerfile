@@ -1,4 +1,4 @@
-FROM node:12-slim
+FROM node:12-buster-slim
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -27,6 +27,9 @@ RUN apt-get update \
   && apt-get install -y sudo \
   && echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
   && chmod 0440 /etc/sudoers.d/$USERNAME \
+  #
+  # Add known RSA host keys
+  && ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts \
   #
   # Clean up
   && apt-get autoremove -y \
