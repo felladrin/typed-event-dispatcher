@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:12-slim
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
