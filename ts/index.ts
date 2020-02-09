@@ -6,8 +6,8 @@ export type TypedEvent<T = void> = {
 }
 
 export class TypedEventDispatcher<T = void> {
-  private readonly listeners: Array<TypedEventListener<T>> = [];
-  private readonly oneTimeListeners: Array<TypedEventListener<T>> = [];
+  private readonly listeners: TypedEventListener<T>[] = [];
+  private readonly oneTimeListeners: TypedEventListener<T>[] = [];
 
   public dispatch(data?: T): void {
     this.callListeners(data);
@@ -47,9 +47,9 @@ export class TypedEventDispatcher<T = void> {
   }
 
   private wipeOneTimeListeners(): void {
+    this.oneTimeListeners.map(listener => this.removeListener(listener));
     while (this.oneTimeListeners.length > 0) {
-      const listener = this.oneTimeListeners.pop() as TypedEventListener<T>;
-      this.removeListener(listener);
+      this.oneTimeListeners.pop();
     }
   }
 }
