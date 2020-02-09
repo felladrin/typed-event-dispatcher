@@ -47,7 +47,7 @@ export class TypedEventDispatcher<T = void> {
   }
 
   private wipeOneTimeListeners(): void {
-    this.oneTimeListeners.map(listener => this.removeListener(listener));
+    this.oneTimeListeners.forEach(listener => this.removeListener(listener));
     while (this.oneTimeListeners.length > 0) {
       this.oneTimeListeners.pop();
     }
