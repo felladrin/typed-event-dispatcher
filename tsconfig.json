@@ -6,10 +6,12 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "js",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": [
+    "ts"
+  ]
 }
