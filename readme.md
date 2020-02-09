@@ -20,14 +20,14 @@ Works on Node.js and Browsers.
 npm install typed-event-dispatcher
 ```
 ```js
-// OPTION 1: Import as a TypeScript Module, for TS projects:
-import { TypedEventDispatcher } from "typed-event-dispatcher/ts";
+// OPTION 1: Import as an ES Module, for JS/TS projects.
+import { TypedEventDispatcher } from "typed-event-dispatcher";
 
-// OPTION 2: Require as a CommonJS Module, for JS projects:
+// OPTION 2: Require as a CommonJS Module, for JS projects.
 const { TypedEventDispatcher } = require("typed-event-dispatcher");
 
-// OPTION 3: Import as a ES Module, for JS projects:
-import { TypedEventDispatcher } from "typed-event-dispatcher";
+// OPTION 3: Import as a TypeScript Module, for TS projects.
+import { TypedEventDispatcher } from "typed-event-dispatcher/ts";
 ```
 ```ts
 class Counter {
