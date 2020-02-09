@@ -15,7 +15,7 @@
     "build": "npm run clean && tsc",
     "test": "jest",
     "collect-coverage": "jest --collectCoverage",
-    "clean": "del js coverage",
+    "clean": "rimraf js coverage",
     "prepare": "npm run build",
     "preview-package-contents": "npm pack --dry-run"
   },
@@ -37,8 +37,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.1.2",
-    "del-cli": "^3.0.0",
     "jest": "^25.1.0",
+    "rimraf": "^3.0.1",
     "ts-jest": "^25.2.0",
     "typescript": "^3.7.5"
   }
