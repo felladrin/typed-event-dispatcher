@@ -3,8 +3,9 @@
 [![npm version](https://img.shields.io/npm/v/typed-event-dispatcher.svg?style=flat)](https://www.npmjs.org/package/typed-event-dispatcher)
 [![Build Status](https://img.shields.io/github/workflow/status/felladrin/typed-event-dispatcher/Build%20and%20Test)](https://github.com/felladrin/typed-event-dispatcher/actions?query=workflow%3A%22Build+and+Test%22)
 [![Coverage Status](https://img.shields.io/coveralls/github/felladrin/typed-event-dispatcher)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
-[![David](https://img.shields.io/david/felladrin/typed-event-dispatcher)](https://david-dm.org/felladrin/typed-event-dispatcher)
+[![Dependencies](https://img.shields.io/david/felladrin/typed-event-dispatcher)](https://david-dm.org/felladrin/typed-event-dispatcher)
 [![npm downloads](https://img.shields.io/npm/dm/typed-event-dispatcher.svg?style=flat)](http://npm-stat.com/charts.html?package=typed-event-dispatcher)
+[![GitHub](https://img.shields.io/github/license/felladrin/typed-event-dispatcher)](http://victor.mit-license.org/)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/typed-event-dispatcher)](https://bundlephobia.com/result?p=typed-event-dispatcher)
 
 A solution for strongly-typed events that can be publicly listened but internally-only dispatched.
@@ -15,13 +16,20 @@ Works on Node.js and Browsers.
 
 ## Getting Started
 
-```shell script
+```sh
 npm install typed-event-dispatcher
 ```
+```js
+// OPTION 1: Import as a TypeScript Module, for TS projects:
+import { TypedEventDispatcher } from "typed-event-dispatcher/ts";
 
-```typescript
+// OPTION 2: Require as a CommonJS Module, for JS projects:
+const { TypedEventDispatcher } = require("typed-event-dispatcher");
+
+// OPTION 3: Import as a ES Module, for JS projects:
 import { TypedEventDispatcher } from "typed-event-dispatcher";
-
+```
+```ts
 class Counter {
   //--------------------------------------------//
   // STEP 1: Create a private event dispatcher. //
@@ -43,6 +51,7 @@ class Counter {
       // STEP 3: Dispatch the event so listeners can react to it. //
       //----------------------------------------------------------//
       this.onCountIncreasedDispatcher.dispatch(this.count);
+
     }, 1000);
   }
 
@@ -73,11 +82,52 @@ class Example {
 new Example().start();
 ```
 
+## API Reference
+
+### `TypedEventDispatcher<T>`
+
+```ts
+dispatch(data?: T): void;
+```
+> Dispatches the event, opitionally passing some data.
+
+---
+
+```ts
+get getter(): TypedEvent<T>;
+```
+> Returns the TypedEvent, see below.
+
+---
+
+### `TypedEvent<T>`
+
+```ts
+addListener(listener: TypedEventListener<T>, listenOnlyOnce?: boolean): void;
+```
+> Adds a listener to the event, optionally setting it to listen only once. (`listenOnlyOnce` is `false` by default)
+
+---
+
+```ts
+removeListener(listener: TypedEventListener<T>): void;
+```
+> Removes a listener, passed by reference.
+
+---
+
+```ts
+type TypedEventListener<T> = (data?: T) => void;
+```
+> A type definition representing a void function with optional parameter dynamically-typed.
+
+---
+
 ## Usage Overview
 
 Define private event dispatchers on your class, with or without data-passthroughs, like this:
 
-```typescript
+```ts
 class ServerExample
 {
   // Passing no data, just informing the event happened:
@@ -93,7 +143,7 @@ class ServerExample
 
 If you need to pass several data with your event, define a custom data type:
 
-```typescript
+```ts
 type Player = {
   name: string;
   level: number;
@@ -113,7 +163,7 @@ The getters expose only two methods: `addListener()` and `removeListener()`.
 And you don't need to declare the return type of the getters,
 as TypeScript resolves it automatically.
 
-```typescript
+```ts
 class ServerExample {
   public get onStarted() {
     return this.onStartedDispatcher.getter;
@@ -137,7 +187,7 @@ Finally, `dispatch()` the events when some action occurs!
 Usually we do it at the end of the class methods, so other
 classes react after those actions.
 
-```typescript
+```ts
 class ServerExample {
   private start() {
     // (...)
@@ -165,7 +215,7 @@ On other classes, start listening to those events.
 The callback parameters are also auto-resolved by TypeScript,
 based on the type of the event. So you don't need to declare them.
 
-```typescript
+```ts
 class AppExample
 {
   //-------------------------------//
@@ -221,6 +271,6 @@ class AppExample
 }
 ```
 
-## License
+## Developing inside a container
 
-[The MIT License](http://victor.mit-license.org)
+Inside `.devcontainer` folder is the configuration of a Docker Container with all tools needed to develop this project. It's meant to be used with [VS Code](https://code.visualstudio.com), requiring only the installation of [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension. For usage instructions, refer to [this tutorial](https://code.visualstudio.com/docs/remote/containers).
