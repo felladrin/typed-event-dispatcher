@@ -1,4 +1,4 @@
-type TypedEventListener<T> = (data?: T) => void;
+export type TypedEventListener<T> = (data?: T) => void;
 
 export type TypedEvent<T = void> = {
   addListener(listener: TypedEventListener<T>, listenOnlyOnce?: boolean): void;
