@@ -19,6 +19,7 @@ Works on Node.js and Browsers.
 ```sh
 npm install typed-event-dispatcher
 ```
+
 ```js
 // OPTION 1: Import as an ES Module, for JS/TS projects.
 import { TypedEventDispatcher } from "typed-event-dispatcher";
@@ -29,6 +30,7 @@ const { TypedEventDispatcher } = require("typed-event-dispatcher");
 // OPTION 3: Import as a TypeScript Module, for TS projects.
 import { TypedEventDispatcher } from "typed-event-dispatcher/ts";
 ```
+
 ```ts
 class Counter {
   //--------------------------------------------//
@@ -91,13 +93,15 @@ new Example().start();
 ```ts
 dispatch(data?: T): void;
 ```
-> Dispatches the event, opitionally passing some data.
+
+> Dispatches the event, optionally passing some data.
 
 ---
 
 ```ts
 get getter(): TypedEvent<T>;
 ```
+
 > Returns the TypedEvent, see below.
 
 ---
@@ -109,6 +113,7 @@ get getter(): TypedEvent<T>;
 ```ts
 addListener(listener: TypedEventListener<T>, listenOnlyOnce?: boolean): void;
 ```
+
 > Adds a listener to the event, optionally setting it to listen only once. (`listenOnlyOnce` is `false` by default)
 
 ---
@@ -116,6 +121,7 @@ addListener(listener: TypedEventListener<T>, listenOnlyOnce?: boolean): void;
 ```ts
 removeListener(listener: TypedEventListener<T>): void;
 ```
+
 > Removes a listener, passed by reference.
 
 ---
@@ -123,6 +129,7 @@ removeListener(listener: TypedEventListener<T>): void;
 ```ts
 type TypedEventListener<T> = (data?: T) => void;
 ```
+
 > A type definition representing a void function with optional parameter dynamically-typed.
 
 ---
