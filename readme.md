@@ -86,6 +86,8 @@ new Example().start();
 
 ### `TypedEventDispatcher<T>`
 
+---
+
 ```ts
 dispatch(data?: T): void;
 ```
@@ -101,6 +103,8 @@ get getter(): TypedEvent<T>;
 ---
 
 ### `TypedEvent<T>`
+
+---
 
 ```ts
 addListener(listener: TypedEventListener<T>, listenOnlyOnce?: boolean): void;
