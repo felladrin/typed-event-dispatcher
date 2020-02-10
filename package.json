@@ -1,45 +1,47 @@
 {
-  "name": "typed-event-dispatcher",
-  "version": "1.2.0",
-  "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched.",
-  "main": "js/index.js",
-  "types": "js/index.d.ts",
-  "files": [
-    "js/*",
-    "ts/*",
-    "license.txt",
-    "package.json",
-    "readme.md"
-  ],
-  "scripts": {
-    "build": "npm run clean && tsc",
-    "test": "jest",
-    "collect-coverage": "jest --collectCoverage",
-    "clean": "rimraf js coverage",
-    "prepare": "npm run build",
-    "preview-package-contents": "npm pack --dry-run"
-  },
-  "keywords": [
-    "event",
-    "dispatcher",
-    "signal",
-    "emitter",
-    "strongly",
-    "typed",
-    "typescript"
-  ],
-  "repository": "github:felladrin/typed-event-dispatcher",
-  "author": {
-    "name": "Victor Nogueira",
-    "email": "victor@victornogueira.app",
-    "url": "https://victornogueira.app"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^25.1.2",
-    "jest": "^25.1.0",
-    "rimraf": "^3.0.1",
-    "ts-jest": "^25.2.0",
-    "typescript": "^3.7.5"
-  }
+    "name": "typed-event-dispatcher",
+    "version": "1.2.0",
+    "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched.",
+    "main": "js/index.js",
+    "types": "js/index.d.ts",
+    "files": [
+        "js/*",
+        "ts/*",
+        "license.txt",
+        "package.json",
+        "readme.md"
+    ],
+    "scripts": {
+        "build": "npm run clean && tsc",
+        "test": "jest",
+        "collect-coverage": "jest --collectCoverage",
+        "clean": "rimraf js coverage",
+        "format-ts": "tsfmt -r",
+        "prepare": "npm run build",
+        "preview-package-contents": "npm pack --dry-run"
+    },
+    "keywords": [
+        "event",
+        "dispatcher",
+        "signal",
+        "emitter",
+        "strongly",
+        "typed",
+        "typescript"
+    ],
+    "repository": "github:felladrin/typed-event-dispatcher",
+    "author": {
+        "name": "Victor Nogueira",
+        "email": "victor@victornogueira.app",
+        "url": "https://victornogueira.app"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jest": "^25.1.2",
+        "jest": "^25.1.0",
+        "rimraf": "^3.0.1",
+        "ts-jest": "^25.2.0",
+        "typescript": "^3.7.5",
+        "typescript-formatter": "^7.2.2"
+    }
 }
