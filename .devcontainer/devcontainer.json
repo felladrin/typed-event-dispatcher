@@ -1,11 +1,8 @@
 {
-	"name": "Node.js 12 & TypeScript",
+	"name": "Typed Event Dispatcher",
 	"dockerFile": "Dockerfile",
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
-	},
-	"extensions": [
-		"dbaeumer.vscode-eslint"
-	],
-	"remoteUser": "node"
+	"remoteUser": "developer",
+	"mounts": [
+		"source=typed-event-dispatcher-vscode-extensions,target=/home/developer/.vscode-server/extensions,type=volume"
+	]
 }
