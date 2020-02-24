@@ -26,6 +26,8 @@ USER vscode
 
 # Create the folder for storing vs-code extensions.
 RUN mkdir -p ~/.vscode-server/extensions \
+  && mkdir -p ~/.vscode-server-insiders \
+  && ln -s ~/.vscode-server/extensions ~/.vscode-server-insiders/extensions \
   # Add GitHub to known hosts if it matches the fingerprint.
   && mkdir -p ~/.ssh \
   && ssh-keyscan -H github.com > /tmp/keyscan-result \
