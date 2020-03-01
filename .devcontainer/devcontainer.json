@@ -1,7 +1,0 @@
-{
-	"name": "Typed Event Dispatcher",
-	"dockerFile": "Dockerfile",
-	"mounts": [
-		"source=typed-event-dispatcher-vscode-extensions,target=/home/vscode/.vscode-server/extensions,type=volume"
-	]
-}
