@@ -8,6 +8,18 @@ export type TypedEvent<T = void> = {
 export class TypedEventDispatcher<T = void> {
     private readonly listeners: TypedEventListener<T>[] = [];
     private readonly oneTimeListeners: TypedEventListener<T>[] = [];
+    private readonly typedEvent: TypedEvent<T>;
+
+    constructor() {
+        this.typedEvent = {
+            addListener: this.addListener,
+            removeListener: this.removeListener
+        };
+        Object.defineProperties(this.typedEvent, {
+            listeners: { value: this.listeners },
+            oneTimeListeners: { value: this.oneTimeListeners }
+        });
+    }
 
     public dispatch(data?: T): void {
         this.callListeners(data);
@@ -15,15 +27,7 @@ export class TypedEventDispatcher<T = void> {
     }
 
     public get getter(): TypedEvent<T> {
-        const typedEvent: TypedEvent<T> = {
-            addListener: this.addListener,
-            removeListener: this.removeListener
-        };
-        Object.defineProperties(typedEvent, {
-            listeners: { value: this.listeners },
-            oneTimeListeners: { value: this.oneTimeListeners }
-        });
-        return typedEvent;
+        return this.typedEvent;
     }
 
     private addListener(listener: TypedEventListener<T>, listenOnlyOnce = false): void {
