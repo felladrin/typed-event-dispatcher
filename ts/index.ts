@@ -18,7 +18,6 @@ export class TypedEventDispatcher<T = void> {
                 listeners.push(listener);
                 if (listenOnlyOnce) oneTimeListeners.push(listener);
             },
-
             removeListener(listener: TypedEventListener<T>): void {
                 const indexOfListener = listeners.indexOf(listener);
                 if (indexOfListener >= 0) listeners.splice(indexOfListener, 1);
@@ -27,8 +26,9 @@ export class TypedEventDispatcher<T = void> {
 
         this.dispatch = (data?: T) => {
             listeners.forEach(listener => listener.call(listener, data));
-            oneTimeListeners.forEach(listener => this.getter.removeListener(listener));
-            while (oneTimeListeners.length > 0) oneTimeListeners.pop();
+            while (oneTimeListeners.length > 0) {
+                this.getter.removeListener(oneTimeListeners.pop() as TypedEventListener<T>);
+            }
         };
 
         [this, this.getter].forEach(object => {
