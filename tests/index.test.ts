@@ -63,14 +63,14 @@ beforeEach(() => {
     listener = jest.fn();
 });
 
-test('app getters should not be null after app construction', () => {
+test("app getters should not be null after app construction", () => {
     expect(app.onServerStarted).not.toBeNull();
     expect(app.onPlayersCountUpdated).not.toBeNull();
     expect(app.onDebugModeToggled).not.toBeNull();
     expect(app.onPlayerConnected).not.toBeNull();
 });
 
-test('addListener() called without the second parameter should call the listener more than once, when the event is dispatched more than once', () => {
+test("addListener() called without the second parameter should call the listener more than once, when the event is dispatched more than once", () => {
     app.onServerStarted.addListener(listener);
     const times = pickRandomIntInclusive(2, 5);
     repeatFunction(() => {
@@ -117,12 +117,12 @@ test("removeListener() should be executed with no problem if listener wasn't fin
 });
 
 test("typed event getter should have methods to add and remove listeners", () => {
-    expect(app.onServerStarted).toHaveProperty('addListener');
-    expect(app.onServerStarted).toHaveProperty('removeListener');
+    expect(app.onServerStarted).toHaveProperty("addListener");
+    expect(app.onServerStarted).toHaveProperty("removeListener");
 });
 
 test("typed event getter should not have the dispatch method", () => {
-    expect(app.onServerStarted).not.toHaveProperty('dispatch');
+    expect(app.onServerStarted).not.toHaveProperty("dispatch");
 });
 
 test("should pass 'undefined' to the listener when the event dispatches no parameters", () => {
@@ -147,4 +147,29 @@ test("should pass the correct parameters to the listener when the event dispatch
     app.onPlayerConnected.addListener(listener);
     app.dispatchPlayerConnected();
     expect(listener.mock.calls).toEqual([[{ name: "TS", level: 7, isAlive: true }]]);
+});
+
+test("should have properties 'dispatch' and 'getter' of the event dispatcher protected against rewriting and reconfiguration", () => {
+    const onServerStartedDispatcher: TypedEventDispatcher<void> = Object.getOwnPropertyDescriptor(app, "onServerStartedDispatcher")?.value;
+    ["dispatch", "getter"].forEach(property => {
+        const propertyDescriptor = Object.getOwnPropertyDescriptor(onServerStartedDispatcher, property);
+        ["writable", "configurable"].forEach(propertyFromDescriptor => {
+            expect(propertyDescriptor).toHaveProperty(propertyFromDescriptor, false);
+        })
+    });
+});
+
+test("should have properties 'addListener' and 'removeListener' of the event getter protected against rewriting and reconfiguration", () => {
+    ["addListener", "removeListener"].forEach(property => {
+        const propertyDescriptor = Object.getOwnPropertyDescriptor(app.onServerStarted, property);
+        ["writable", "configurable"].forEach(propertyFromDescriptor => {
+            expect(propertyDescriptor).toHaveProperty(propertyFromDescriptor, false);
+        })
+    });
+    expect(() => {
+        app.onServerStarted.addListener = jest.fn();
+    }).toThrowError(/Cannot assign to read only property 'addListener' of object/g);
+    expect(() => {
+        app.onServerStarted.removeListener = jest.fn();
+    }).toThrowError(/Cannot assign to read only property 'removeListener' of object/g);
 });
