@@ -1,4 +1,4 @@
-import { TypedEventDispatcher } from "../ts";
+import { TypedEventDispatcher, TypedEvent } from "../ts";
 
 type Player = {
     name: string;
@@ -12,35 +12,35 @@ class App {
     private onDebugModeToggledDispatcher = new TypedEventDispatcher<boolean>();
     private onPlayerConnectedDispatcher = new TypedEventDispatcher<Player>();
 
-    public get onServerStarted() {
+    public get onServerStarted(): TypedEvent<void> {
         return this.onServerStartedDispatcher.getter;
     }
 
-    public get onPlayersCountUpdated() {
+    public get onPlayersCountUpdated(): TypedEvent<number> {
         return this.onPlayersCountUpdatedDispatcher.getter;
     }
 
-    public get onDebugModeToggled() {
+    public get onDebugModeToggled(): TypedEvent<boolean> {
         return this.onDebugModeToggledDispatcher.getter;
     }
 
-    public get onPlayerConnected() {
+    public get onPlayerConnected(): TypedEvent<Player> {
         return this.onPlayerConnectedDispatcher.getter;
     }
 
-    public dispatchServerStarted() {
+    public dispatchServerStarted(): void {
         this.onServerStartedDispatcher.dispatch();
     }
 
-    public dispatchPlayersCountUpdated() {
+    public dispatchPlayersCountUpdated(): void {
         this.onPlayersCountUpdatedDispatcher.dispatch(32);
     }
 
-    public dispatchDebugModeToggled() {
+    public dispatchDebugModeToggled(): void {
         this.onDebugModeToggledDispatcher.dispatch(true);
     }
 
-    public dispatchPlayerConnected() {
+    public dispatchPlayerConnected(): void {
         this.onPlayerConnectedDispatcher.dispatch({ name: "TS", level: 7, isAlive: true });
     }
 }

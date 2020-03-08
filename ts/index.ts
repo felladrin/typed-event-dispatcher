@@ -24,7 +24,7 @@ export class TypedEventDispatcher<T = void> {
             }
         };
 
-        this.dispatch = (data?: T) => {
+        this.dispatch = (data?: T): void => {
             listeners.forEach(listener => listener.call(listener, data));
             while (oneTimeListeners.length > 0) {
                 this.getter.removeListener(oneTimeListeners.pop() as TypedEventListener<T>);
@@ -32,7 +32,7 @@ export class TypedEventDispatcher<T = void> {
         };
 
         [this, this.getter].forEach(object => {
-            Object.keys(object).forEach(property => {
+            Object.getOwnPropertyNames(object).forEach(property => {
                 Object.defineProperty(object, property, {
                     writable: false, configurable: false
                 });
