@@ -52,7 +52,6 @@ class Counter {
       // STEP 3: Dispatch the event so listeners can react to it. //
       //----------------------------------------------------------//
       this.onCountIncreasedDispatcher.dispatch(this.count);
-
     }, 1000);
   }
 
@@ -138,8 +137,7 @@ type TypedEventListener<T> = (data?: T) => void;
 Define private event dispatchers on your class, with or without data-passthroughs, like this:
 
 ```ts
-class ServerExample
-{
+class ServerExample {
   // Passing no data, just informing the event happened:
   private onStartedDispatcher = new TypedEventDispatcher();
 
@@ -160,8 +158,7 @@ type Player = {
   isAlive: boolean;
 };
 
-class ServerExample
-{
+class ServerExample {
   // Passing the complete player info along with the event:
   private onPlayerConnectedDispatcher = new TypedEventDispatcher<Player>();
 }
@@ -226,22 +223,20 @@ The callback parameters are also auto-resolved by TypeScript,
 based on the type of the event. So you don't need to declare them.
 
 ```ts
-class AppExample
-{
+class AppExample {
   //-------------------------------//
   // A private variable holding an //
   // instance of the other class.  //
   //-------------------------------//
   private server: ServerExample;
 
-  public registerListeners()
-  {
+  public registerListeners() {
     //---------------------------------------//
     // The event 'onStarted' passes no data, //
     // so the listener has no arguments.     //
     //---------------------------------------//
     this.server.onStarted.addListener(() => {
-      console.log("Server started!")
+      console.log("Server started!");
     });
 
     //----------------------------------------------//
