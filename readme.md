@@ -6,11 +6,13 @@
 [![GitHub](https://img.shields.io/github/license/felladrin/typed-event-dispatcher)](http://victor.mit-license.org/)
 [![Minified + Gzipped Size](https://img.shields.io/bundlephobia/minzip/typed-event-dispatcher)](https://bundlephobia.com/result?p=typed-event-dispatcher)
 
-A lightweight dependency-free solution for strongly-typed events that can be publicly listened but internally-only dispatched.
+Strongly-typed events that can be publicly listened but internally-only dispatched.
 
-Made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
+## Features
 
-Works on Node.js and Browsers.
+- Fast, lightweight and dependency-free.
+- Made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
+- Works on Node.js and Browsers.
 
 ## Getting Started
 
