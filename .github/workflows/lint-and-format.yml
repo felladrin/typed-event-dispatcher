@@ -1,0 +1,53 @@
+name: Lint and Format
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "**.ts"
+      - "package*json"
+      - ".github/workflows/*.yml"
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint project
+        run: npm run lint
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4.1.0
+        with:
+          commit_message: Fix lint issues
+          branch: ${{ github.head_ref }}
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: npm ci
+      - name: Format files
+        run: npm run format
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4.1.0
+        with:
+          commit_message: Reformat code
+          branch: ${{ github.head_ref }}
