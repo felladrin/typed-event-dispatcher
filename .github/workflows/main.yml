@@ -32,13 +32,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
       - name: Lint project
-        run: |
-          npm run lint
-          git commit -a -m "Fix lint issues" || echo "No changes to commit"
-      - name: Lint project
-        run: |
-          npm run format
-          git commit -a -m "Reformat code" || echo "No changes to commit"
+        run: npm run lint
+      - name: Format files
+        run: npm run format
       - name: Build project
         run: npm run build
       - name: Test and collect coverage info
@@ -49,7 +45,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Push changes
         if: ${{ matrix.node }} == '12' && ${{ matrix.os }} == 'ubuntu-latest'
-        uses: ad-m/github-push-action@master
+        uses: stefanzweifel/git-auto-commit-action@v4.1.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: Fix format and lint issues
           branch: ${{ github.head_ref }}
