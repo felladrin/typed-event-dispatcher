@@ -3,11 +3,10 @@
 [![NPM Version](https://img.shields.io/npm/v/typed-event-dispatcher.svg?style=flat)](https://www.npmjs.org/package/typed-event-dispatcher)
 [![Build Status](https://img.shields.io/github/workflow/status/felladrin/typed-event-dispatcher/Build%20and%20Test)](https://github.com/felladrin/typed-event-dispatcher/actions?query=workflow%3A%22Build+and+Test%22)
 [![Coverage Status](https://img.shields.io/coveralls/github/felladrin/typed-event-dispatcher)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
-[![Dependencies](https://img.shields.io/david/felladrin/typed-event-dispatcher)](https://david-dm.org/felladrin/typed-event-dispatcher)
 [![GitHub](https://img.shields.io/github/license/felladrin/typed-event-dispatcher)](http://victor.mit-license.org/)
 [![Minified + Gzipped Size](https://img.shields.io/bundlephobia/minzip/typed-event-dispatcher)](https://bundlephobia.com/result?p=typed-event-dispatcher)
 
-A solution for strongly-typed events that can be publicly listened but internally-only dispatched.
+A lightweight dependency-free solution for strongly-typed events that can be publicly listened but internally-only dispatched.
 
 Made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
 
@@ -92,15 +91,15 @@ new Example().start();
 dispatch(data?: T): void;
 ```
 
-> Dispatches the event, optionally passing some data.
+> Dispatches the TypedEvent, optionally passing some data.
 
 ---
 
 ```ts
-get getter(): TypedEvent<T>;
+getter: TypedEvent<T>;
 ```
 
-> Returns the TypedEvent, see below.
+> Holds the respective TypedEvent of this dispatcher.
 
 ---
 
