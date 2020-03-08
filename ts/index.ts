@@ -1,8 +1,8 @@
 export type TypedEventListener<T> = (data?: T) => void;
 
 export type TypedEvent<T = void> = {
-  addListener(listener: TypedEventListener<T>, listenOnlyOnce?: boolean): void;
-  removeListener(listener: TypedEventListener<T>): void;
+  addListener: (listener: TypedEventListener<T>, listenOnlyOnce?: boolean) => void;
+  removeListener: (listener: TypedEventListener<T>) => void;
 };
 
 export class TypedEventDispatcher<T = void> {
@@ -14,11 +14,11 @@ export class TypedEventDispatcher<T = void> {
     const oneTimeListeners: TypedEventListener<T>[] = [];
 
     this.getter = {
-      addListener(listener: TypedEventListener<T>, listenOnlyOnce = false): void {
+      addListener: (listener: TypedEventListener<T>, listenOnlyOnce = false): void => {
         listeners.push(listener);
         if (listenOnlyOnce) oneTimeListeners.push(listener);
       },
-      removeListener(listener: TypedEventListener<T>): void {
+      removeListener: (listener: TypedEventListener<T>): void => {
         const indexOfListener = listeners.indexOf(listener);
         if (indexOfListener >= 0) listeners.splice(indexOfListener, 1);
       }
