@@ -1,12 +1,13 @@
 name: Build and Test
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    paths:
-      - "**.ts"
-      - "package*json"
+    push:
+        branches:
+            - master
+    pull_request:
+        paths:
+            - "**.ts"
+            - "package*json"
+            - ".github/workflows/*.yml"
 jobs:
   run:
     name: Node.js v${{ matrix.node }} on ${{ matrix.os }}
@@ -24,6 +25,18 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
         run: npm ci
+      - name: Configure git user
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      - name: Lint project
+        run: |
+          npm run lint
+          git commit -a -m "Fix lint issues" || echo "No changes to commit"
+      - name: Lint project
+        run: |
+          npm run format
+          git commit -a -m "Reformat code" || echo "No changes to commit"
       - name: Build project
         run: npm run build
       - name: Test and collect coverage info
@@ -32,3 +45,7 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
