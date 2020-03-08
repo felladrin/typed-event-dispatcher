@@ -1,13 +1,13 @@
 name: Build and Test
 on:
-    push:
-        branches:
-            - master
-    pull_request:
-        paths:
-            - "**.ts"
-            - "package*json"
-            - ".github/workflows/*.yml"
+  push:
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "**.ts"
+      - "package*json"
+      - ".github/workflows/*.yml"
 jobs:
   run:
     name: Node.js v${{ matrix.node }} on ${{ matrix.os }}
