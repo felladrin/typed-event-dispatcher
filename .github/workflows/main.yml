@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -38,13 +40,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel: true
+          path-to-lcov: ./coverage/lcov.info
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
       - name: Push changes
-        if: ${{ matrix.node }} == '12' && ${{ matrix.os }} == 'ubuntu-latest'
         uses: stefanzweifel/git-auto-commit-action@v4.1.0
         with:
           commit_message: Fix format and lint issues
