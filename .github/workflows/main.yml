@@ -19,6 +19,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - run: git checkout HEAD^
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -46,6 +49,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Push changes
+        if: ${{ matrix.node }} == '12' && ${{ matrix.os }} == 'ubuntu-latest'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
