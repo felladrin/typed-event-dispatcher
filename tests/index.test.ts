@@ -148,28 +148,3 @@ test("should pass the correct parameters to the listener when the event dispatch
   app.dispatchPlayerConnected();
   expect(listener.mock.calls).toEqual([[{ name: "TS", level: 7, isAlive: true }]]);
 });
-
-test("should have properties 'dispatch' and 'getter' of the event dispatcher protected against rewriting and reconfiguration", () => {
-  const onServerStartedDispatcher: TypedEventDispatcher<void> = Object.getOwnPropertyDescriptor(app, "onServerStartedDispatcher")?.value;
-  ["dispatch", "getter"].forEach(property => {
-    const propertyDescriptor = Object.getOwnPropertyDescriptor(onServerStartedDispatcher, property);
-    ["writable", "configurable"].forEach(propertyFromDescriptor => {
-      expect(propertyDescriptor).toHaveProperty(propertyFromDescriptor, false);
-    });
-  });
-});
-
-test("should have properties 'addListener' and 'removeListener' of the event getter protected against rewriting and reconfiguration", () => {
-  ["addListener", "removeListener"].forEach(property => {
-    const propertyDescriptor = Object.getOwnPropertyDescriptor(app.onServerStarted, property);
-    ["writable", "configurable"].forEach(propertyFromDescriptor => {
-      expect(propertyDescriptor).toHaveProperty(propertyFromDescriptor, false);
-    });
-  });
-  expect(() => {
-    app.onServerStarted.addListener = jest.fn();
-  }).toThrowError(/Cannot assign to read only property 'addListener' of object/g);
-  expect(() => {
-    app.onServerStarted.removeListener = jest.fn();
-  }).toThrowError(/Cannot assign to read only property 'removeListener' of object/g);
-});
