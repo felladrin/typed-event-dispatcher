@@ -1,4 +1,4 @@
-export type TypedEventListener<T> = (data: T) => void;
+export type TypedEventListener<T> = T extends void ? () => void : (data: T) => void;
 
 export type TypedEvent<T> = {
   addListener: (listener: TypedEventListener<T>, listenOnlyOnce?: boolean) => void;
@@ -24,7 +24,7 @@ function removeListener<T>(this: TypedEventDispatcherExtended<T>, listener: Type
   if (indexOfListener >= 0) listeners.splice(indexOfListener, 1);
 }
 
-export class TypedEventDispatcher<T = undefined> {
+export class TypedEventDispatcher<T = void> {
   constructor() {
     Object.defineProperties(this, {
       listeners: { value: [] },
@@ -37,11 +37,10 @@ export class TypedEventDispatcher<T = undefined> {
     removeListener: removeListener.bind(this)
   };
 
-  public dispatch(): void;
   public dispatch(data: T): void;
-  public dispatch(this: TypedEventDispatcherExtended<T>, data?: T): void {
+  public dispatch(this: TypedEventDispatcherExtended<T>, data: T): void {
     const { listeners, oneTimeListeners, getter } = this;
-    listeners.forEach(listener => listener.call(listener, data as T));
+    listeners.forEach(listener => listener(data));
     while (oneTimeListeners.length > 0) getter.removeListener(oneTimeListeners.pop() as TypedEventListener<T>);
   }
 }
