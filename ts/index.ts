@@ -1,6 +1,6 @@
 export type TypedEventListener<T> = T extends void ? () => void : (data: T) => void;
 
-export type TypedEvent<T> = Event<T>;
+export type TypedEvent<T = void> = Event<T>;
 
 type TypedEventDispatcherExtended<T> = TypedEventDispatcher<T> & {
   listeners: TypedEventListener<T>[];
