@@ -1,7 +1,6 @@
 {
-  "image": "felladrin/vscode-dev-container-ubuntu-git-node",
+  "image": "node:lts-buster",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
-  "mounts": ["source=typed-event-dispatcher-node-modules,target=/workspace/node_modules,type=volume"],
-  "postCreateCommand": "sudo chown -R $(id -u) /workspace"
+  "mounts": ["source=typed-event-dispatcher-node-modules,target=/workspace/node_modules,type=volume"]
 }
