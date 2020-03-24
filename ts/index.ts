@@ -7,7 +7,7 @@ type TypedEventDispatcherExtended<T> = TypedEventDispatcher<T> & {
   oneTimeListeners: TypedEventListener<T>[];
 };
 
-class Event<T> {
+class Event<T = void> {
   constructor(dispatcher: TypedEventDispatcher<T>) {
     this.addListener = this.addListener.bind(dispatcher);
     this.removeListener = this.removeListener.bind(dispatcher);
