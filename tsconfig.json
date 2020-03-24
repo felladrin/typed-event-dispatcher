@@ -3,8 +3,6 @@
     "target": "ES6",
     "module": "commonjs",
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
     "outDir": "js",
     "strict": true,
     "esModuleInterop": true,

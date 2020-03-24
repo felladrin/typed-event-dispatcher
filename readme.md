@@ -21,14 +21,11 @@ npm install typed-event-dispatcher
 ```
 
 ```js
-// OPTION 1: Import as an ES Module, for JS/TS projects.
+// Import as an ES Module.
 import { TypedEventDispatcher } from "typed-event-dispatcher";
 
-// OPTION 2: Require as a CommonJS Module, for JS projects.
+// Or require as a CommonJS Module.
 const { TypedEventDispatcher } = require("typed-event-dispatcher");
-
-// OPTION 3: Import as a TypeScript Module, for TS projects.
-import { TypedEventDispatcher } from "typed-event-dispatcher/ts";
 ```
 
 ```ts
