@@ -8,11 +8,7 @@
 
 Strongly-typed events that can be publicly listened but internally-only dispatched.
 
-## Features
-
-- Fast, lightweight and dependency-free.
-- Made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
-- Works on Node.js and Browsers.
+A lightweight, fully-tested and dependency-free lib made for Typescript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([See Live Example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
 
 ## Getting Started
 
@@ -69,7 +65,7 @@ class Example {
     //-------------------------------------------------------//
     // STEP 4: Listen to events dispatched by other classes. //
     //-------------------------------------------------------//
-    this.counter.onCountIncreased.addListener(count => {
+    this.counter.onCountIncreased.addListener((count) => {
       console.log(`Count increased to ${count}.`);
     });
 
@@ -241,7 +237,7 @@ class AppExample {
     // But 'onPlayersCountUpdated' passes a number, //
     // so the listener has one argument to hold it. //
     //----------------------------------------------//
-    this.server.onPlayersCountUpdated.addListener(playersCount => {
+    this.server.onPlayersCountUpdated.addListener((playersCount) => {
       spawnEnemiesBasedOnPlayersCount(playersCount);
 
       if (playersCount > playersCountRecord) {
@@ -253,7 +249,7 @@ class AppExample {
     // And the listener for 'onDebugModeToggled' also //
     // has an argument, holding the boolean passed.   //
     //------------------------------------------------//
-    this.server.onDebugModeToggled.addListener(isDebugModeActive => {
+    this.server.onDebugModeToggled.addListener((isDebugModeActive) => {
       debug(`Debug Mode set to ${isDebugModeActive}.`);
 
       if (isDebugModeActive) {
@@ -265,7 +261,7 @@ class AppExample {
     // Same story for 'onPlayerConnected', //
     // which passes the player info.       //
     //-------------------------------------//
-    this.server.onPlayerConnected.addListener(player => {
+    this.server.onPlayerConnected.addListener((player) => {
       addToGlobalChat(player);
       createCustomQuests(player);
       prepareRandomEncounters(player);
