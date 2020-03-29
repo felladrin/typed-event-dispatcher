@@ -2,6 +2,7 @@
   "name": "typed-event-dispatcher",
   "version": "1.6.0",
   "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched.",
+  "type": "commonjs",
   "main": "js/index.js",
   "types": "js/index.d.ts",
   "files": [
