@@ -41,7 +41,11 @@ class App {
   }
 
   public dispatchPlayerConnected(): void {
-    this.onPlayerConnectedDispatcher.dispatch({ name: "TS", level: 7, isAlive: true });
+    this.onPlayerConnectedDispatcher.dispatch({
+      name: "TS",
+      level: 7,
+      isAlive: true,
+    });
   }
 }
 
@@ -146,5 +150,7 @@ test("should pass the correct parameters to the listener when the event dispatch
 test("should pass the correct parameters to the listener when the event dispatches a custom type", () => {
   app.onPlayerConnected.addListener(listener);
   app.dispatchPlayerConnected();
-  expect(listener.mock.calls).toEqual([[{ name: "TS", level: 7, isAlive: true }]]);
+  expect(listener.mock.calls).toEqual([
+    [{ name: "TS", level: 7, isAlive: true }],
+  ]);
 });
