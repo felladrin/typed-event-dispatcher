@@ -3,8 +3,8 @@
   "version": "1.6.0",
   "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched.",
   "type": "commonjs",
-  "main": "js/index.js",
-  "types": "js/index.d.ts",
+  "main": "js/typed-event-dispatcher.js",
+  "types": "js/typed-event-dispatcher.d.ts",
   "files": [
     "js/*"
   ],
@@ -13,7 +13,7 @@
     "test": "jest",
     "collect-coverage": "jest --collectCoverage",
     "lint": "eslint . --ext .ts --fix",
-    "clean": "rimraf js coverage",
+    "clean": "rimraf js coverage docs",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
     "docs": "typedoc --out docs --excludeNotExported",
     "prepare": "npm run build",
