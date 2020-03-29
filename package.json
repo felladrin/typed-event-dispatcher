@@ -15,6 +15,7 @@
     "lint": "eslint . --ext .ts --fix",
     "clean": "rimraf js coverage",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
+    "docs": "typedoc --out docs --excludeNotExported",
     "prepare": "npm run build",
     "preview-package-contents": "npm pack --dry-run"
   },
@@ -45,6 +46,7 @@
     "prettier": "^2.0.2",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.2.1",
+    "typedoc": "^0.17.3",
     "typescript": "^3.8.3"
   }
 }
