@@ -2,8 +2,9 @@
   "name": "typed-event-dispatcher",
   "version": "1.6.0",
   "description": "A solution for strongly-typed events that can be publicly listened but internally-only dispatched.",
-  "main": "js/index.js",
-  "types": "js/index.d.ts",
+  "type": "commonjs",
+  "main": "js/typed-event-dispatcher.js",
+  "types": "js/typed-event-dispatcher.d.ts",
   "files": [
     "js/*"
   ],
@@ -12,10 +13,11 @@
     "test": "jest",
     "collect-coverage": "jest --collectCoverage",
     "lint": "eslint . --ext .ts --fix",
-    "clean": "rimraf js coverage",
+    "clean": "rimraf js coverage docs",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
+    "docs": "typedoc --out docs --excludeNotExported",
     "prepare": "npm run build",
-    "preview-package-contents": "npm pack --dry-run"
+    "preview-package-contents": "npm run prepare && npm pack --dry-run"
   },
   "keywords": [
     "event",
@@ -35,15 +37,16 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.1.4",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
-    "@typescript-eslint/parser": "^2.24.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.8.2",
-    "jest": "^25.1.0",
-    "prettier": "1.19.1",
+    "jest": "^25.2.4",
+    "prettier": "^2.0.2",
     "rimraf": "^3.0.2",
-    "ts-jest": "^25.2.1",
+    "ts-jest": "^25.3.0",
+    "typedoc": "^0.17.3",
     "typescript": "^3.8.3"
   }
 }
