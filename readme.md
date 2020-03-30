@@ -78,53 +78,12 @@ new Example().start();
 
 ## API Reference
 
-### `TypedEventDispatcher<T>`
+You can find the latest documentation [here](https://www.victornogueira.app/typed-event-dispatcher/), or generate it locally using `npm run docs`.
 
----
+Although all you need to know is only two definitions:
 
-```ts
-dispatch(data?: T): void;
-```
-
-> Dispatches the TypedEvent, optionally passing some data.
-
----
-
-```ts
-getter: TypedEvent<T>;
-```
-
-> Holds the respective TypedEvent of this dispatcher.
-
----
-
-### `TypedEvent<T>`
-
----
-
-```ts
-addListener(listener: TypedEventListener<T>, listenOnlyOnce?: boolean): void;
-```
-
-> Adds a listener to the event, optionally setting it to listen only once. (`listenOnlyOnce` is `false` by default)
-
----
-
-```ts
-removeListener(listener: TypedEventListener<T>): void;
-```
-
-> Removes a listener, passed by reference.
-
----
-
-```ts
-type TypedEventListener<T> = (data?: T) => void;
-```
-
-> A type definition representing a void function with optional parameter dynamically-typed.
-
----
+- [`TypedEventDispatcher<T>`](https://www.victornogueira.app/typed-event-dispatcher/classes/_typed_event_dispatcher_.typedeventdispatcher.html)
+- [`TypedEvent<T>`](https://www.victornogueira.app/typed-event-dispatcher/modules/_typed_event_dispatcher_.html#typedevent)
 
 ## Usage Overview
 
