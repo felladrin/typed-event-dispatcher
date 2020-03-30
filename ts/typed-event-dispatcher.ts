@@ -48,6 +48,9 @@ class TypedEventGetter<T> implements TypedEvent<T> {
 }
 
 export class TypedEventDispatcher<T = void> {
+  /** Holds the respective TypedEvent of this dispatcher. */
+  public readonly getter: TypedEvent<T>;
+
   constructor();
   constructor(dispatchedDataSample: T);
   constructor() {
@@ -55,10 +58,8 @@ export class TypedEventDispatcher<T = void> {
       listeners: { value: [] },
       oneTimeListeners: { value: [] },
     });
+    this.getter = new TypedEventGetter<T>(this);
   }
-
-  /** Holds the respective TypedEvent of this dispatcher. */
-  public readonly getter: TypedEvent<T> = new TypedEventGetter<T>(this);
 
   /** Dispatches the TypedEvent, optionally passing some data. */
   public dispatch(data: T): void;
