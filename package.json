@@ -28,6 +28,7 @@
     "typed",
     "typescript"
   ],
+  "homepage": "https://www.victornogueira.app/typed-event-dispatcher/",
   "repository": "github:felladrin/typed-event-dispatcher",
   "author": {
     "name": "Victor Nogueira",
