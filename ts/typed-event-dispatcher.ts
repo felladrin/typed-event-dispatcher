@@ -1,10 +1,16 @@
+/** A type definition representing a void function with optional parameter dynamically-typed. */
 export type TypedEventListener<T = void> = T extends void
   ? () => void
   : (data: T) => void;
 
 export type TypedEvent<T = void> = {
+  /** Adds a listener to the event. */
   addListener(listener: TypedEventListener<T>): void;
+
+  /** Adds a listener to the event, optionally setting it to listen only once. */
   addListener(listener: TypedEventListener<T>, listenOnlyOnce: boolean): void;
+
+  /** Removes a listener, passed by reference. */
   removeListener(listener: TypedEventListener<T>): void;
 };
 
@@ -51,8 +57,10 @@ export class TypedEventDispatcher<T = void> {
     });
   }
 
+  /** Holds the respective TypedEvent of this dispatcher. */
   public readonly getter: TypedEvent<T> = new TypedEventGetter<T>(this);
 
+  /** Dispatches the TypedEvent, optionally passing some data. */
   public dispatch(data: T): void;
   public dispatch(this: TypedEventDispatcherExtended<T>, data: T): void {
     const { listeners, oneTimeListeners, getter } = this;
