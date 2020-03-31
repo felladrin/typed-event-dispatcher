@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES2019",
     "module": "commonjs",
     "declaration": true,
-    "outDir": "js",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
-  },
-  "include": ["ts/typed-event-dispatcher.ts"]
+  }
 }

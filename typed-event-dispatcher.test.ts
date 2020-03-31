@@ -101,6 +101,14 @@ test('addListener() called with the second parameter set to "true" should call t
   expect(listener).toBeCalledTimes(1);
 });
 
+test("should ignore multiple additions of the same listener, so each unique listener can be added only once", () => {
+  app.onServerStarted.addListener(listener);
+  app.onServerStarted.addListener(listener);
+  app.onServerStarted.addListener(listener);
+  app.dispatchServerStarted();
+  expect(listener).toBeCalledTimes(1);
+});
+
 test("removeListener() should remove the listener, so next time the event is dispatched, it won't call the listener", () => {
   app.onServerStarted.addListener(listener);
   const times = pickRandomIntInclusive(2, 5);

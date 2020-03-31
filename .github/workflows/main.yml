@@ -57,7 +57,7 @@ jobs:
       - name: Build project
         run: npm run build
       - name: Test and collect coverage info
-        run: npm run collect-coverage
+        run: npm run test
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
