@@ -15,8 +15,7 @@ export type TypedEvent<T = void> = {
 };
 
 type TypedEventDispatcherExtended<T> = TypedEventDispatcher<T> & {
-  listeners: TypedEventListener<T>[];
-  oneTimeListeners: boolean[];
+  database: { listener: TypedEventListener<T>; listenOnlyOnce: boolean }[];
 };
 
 class TypedEventGetter<T> implements TypedEvent<T> {
@@ -31,23 +30,25 @@ class TypedEventGetter<T> implements TypedEvent<T> {
     listener: TypedEventListener<T>,
     listenOnlyOnce = false
   ): void {
-    const { listeners, oneTimeListeners } = this;
-    const listenerWasAlreadyAdded = listeners.indexOf(listener) != -1;
+    const { database } = this;
+    const listenerWasAlreadyAdded = database.some(
+      (record) => record.listener == listener
+    );
     if (listenerWasAlreadyAdded) return;
-    listeners.unshift(listener);
-    oneTimeListeners.unshift(listenOnlyOnce);
+    database.unshift({ listener, listenOnlyOnce });
   }
 
   public removeListener(
     this: TypedEventDispatcherExtended<T>,
     listener: TypedEventListener<T>
   ): void {
-    const { listeners, oneTimeListeners } = this;
-    const indexOfListener = listeners.indexOf(listener);
+    const { database } = this;
+    const indexOfListener = database.findIndex(
+      (record) => record.listener == listener
+    );
     const listenerWasNotAdded = indexOfListener == -1;
     if (listenerWasNotAdded) return;
-    listeners.splice(indexOfListener, 1);
-    oneTimeListeners.splice(indexOfListener, 1);
+    database.splice(indexOfListener, 1);
   }
 }
 
@@ -55,10 +56,7 @@ export class TypedEventDispatcher<T = void> {
   constructor();
   constructor(dispatchedDataSample: T);
   constructor() {
-    Object.defineProperties(this, {
-      listeners: { value: [] },
-      oneTimeListeners: { value: [] },
-    });
+    Object.defineProperties(this, { database: { value: [] } });
     this.getter = new TypedEventGetter<T>(this);
   }
 
@@ -68,14 +66,11 @@ export class TypedEventDispatcher<T = void> {
   /** Dispatches the TypedEvent, optionally passing some data. */
   public dispatch(data: T): void;
   public dispatch(this: TypedEventDispatcherExtended<T>, data: T): void {
-    const { listeners, oneTimeListeners } = this;
-    for (let index = listeners.length - 1; index >= 0; index--) {
-      const listener = listeners[index];
+    const { database } = this;
+    for (let index = database.length - 1; index >= 0; index--) {
+      const { listener, listenOnlyOnce } = database[index];
       listener(data);
-      const isNotAOneTimeListener = !oneTimeListeners[index];
-      if (isNotAOneTimeListener) continue;
-      listeners.splice(index, 1);
-      oneTimeListeners.splice(index, 1);
+      if (listenOnlyOnce) database.splice(index, 1);
     }
   }
 }
