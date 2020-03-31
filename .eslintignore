@@ -1,4 +1,8 @@
 node_modules
-js
+typed-event-dispatcher.d.ts
+typed-event-dispatcher.js
+typed-event-dispatcher.test.d.ts
+typed-event-dispatcher.test.js
+docs
 coverage
 package-lock.json
