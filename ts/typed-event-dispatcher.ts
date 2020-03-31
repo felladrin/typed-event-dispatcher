@@ -16,15 +16,14 @@ export type TypedEvent<T = void> = {
 
 type TypedEventDispatcherExtended<T> = TypedEventDispatcher<T> & {
   listeners: TypedEventListener<T>[];
-  oneTimeListeners: TypedEventListener<T>[];
+  oneTimeListeners: boolean[];
 };
 
 class TypedEventGetter<T> implements TypedEvent<T> {
   constructor(dispatcher: TypedEventDispatcher<T>) {
-    this.addListener = (this as TypedEvent<T>).addListener.bind(dispatcher);
-    this.removeListener = (this as TypedEvent<T>).removeListener.bind(
-      dispatcher
-    );
+    const { addListener, removeListener } = this as TypedEvent<T>;
+    this.addListener = addListener.bind(dispatcher);
+    this.removeListener = removeListener.bind(dispatcher);
   }
 
   public addListener(
@@ -33,24 +32,26 @@ class TypedEventGetter<T> implements TypedEvent<T> {
     listenOnlyOnce = false
   ): void {
     const { listeners, oneTimeListeners } = this;
-    listeners.push(listener);
-    if (listenOnlyOnce) oneTimeListeners.push(listener);
+    const listenerWasAlreadyAdded = listeners.indexOf(listener) != -1;
+    if (listenerWasAlreadyAdded) return;
+    listeners.unshift(listener);
+    oneTimeListeners.unshift(listenOnlyOnce);
   }
 
   public removeListener(
     this: TypedEventDispatcherExtended<T>,
     listener: TypedEventListener<T>
   ): void {
-    const { listeners } = this;
+    const { listeners, oneTimeListeners } = this;
     const indexOfListener = listeners.indexOf(listener);
-    if (indexOfListener >= 0) listeners.splice(indexOfListener, 1);
+    const listenerWasNotAdded = indexOfListener == -1;
+    if (listenerWasNotAdded) return;
+    listeners.splice(indexOfListener, 1);
+    oneTimeListeners.splice(indexOfListener, 1);
   }
 }
 
 export class TypedEventDispatcher<T = void> {
-  /** Holds the respective TypedEvent of this dispatcher. */
-  public readonly getter: TypedEvent<T>;
-
   constructor();
   constructor(dispatchedDataSample: T);
   constructor() {
@@ -61,12 +62,20 @@ export class TypedEventDispatcher<T = void> {
     this.getter = new TypedEventGetter<T>(this);
   }
 
+  /** Holds the respective TypedEvent of this dispatcher. */
+  public readonly getter: TypedEvent<T>;
+
   /** Dispatches the TypedEvent, optionally passing some data. */
   public dispatch(data: T): void;
   public dispatch(this: TypedEventDispatcherExtended<T>, data: T): void {
-    const { listeners, oneTimeListeners, getter } = this;
-    for (const listener of listeners) listener(data);
-    while (oneTimeListeners.length > 0)
-      getter.removeListener(oneTimeListeners.pop() as TypedEventListener<T>);
+    const { listeners, oneTimeListeners } = this;
+    for (let index = listeners.length - 1; index >= 0; index--) {
+      const listener = listeners[index];
+      listener(data);
+      const isNotAOneTimeListener = !oneTimeListeners[index];
+      if (isNotAOneTimeListener) continue;
+      listeners.splice(index, 1);
+      oneTimeListeners.splice(index, 1);
+    }
   }
 }
