@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/typed-event-dispatcher.svg?style=flat)](https://www.npmjs.org/package/typed-event-dispatcher)
 [![Build Status](https://img.shields.io/github/workflow/status/felladrin/typed-event-dispatcher/Build%20and%20Test)](https://github.com/felladrin/typed-event-dispatcher/actions?query=workflow%3A%22Build+and+Test%22)
-[![Coverage Status](https://img.shields.io/coveralls/github/felladrin/typed-event-dispatcher)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/felladrin/typed-event-dispatcher/badge.svg?branch=master)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
 [![GitHub](https://img.shields.io/github/license/felladrin/typed-event-dispatcher)](http://victor.mit-license.org/)
 [![Minified + Gzipped Size](https://img.shields.io/bundlephobia/minzip/typed-event-dispatcher)](https://bundlephobia.com/result?p=typed-event-dispatcher)
 
