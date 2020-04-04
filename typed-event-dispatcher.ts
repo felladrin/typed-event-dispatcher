@@ -31,11 +31,8 @@ class TypedEventGetter<T> implements TypedEvent<T> {
     listenOnlyOnce = false
   ): void {
     const { database } = this;
-    const listenerWasAlreadyAdded = database.some(
-      (record) => record.listener == listener
-    );
-    if (listenerWasAlreadyAdded) return;
-    database.unshift({ listener, listenOnlyOnce });
+    if (!database.some((record) => record.listener == listener))
+      database.unshift({ listener, listenOnlyOnce });
   }
 
   public removeListener(
@@ -43,12 +40,8 @@ class TypedEventGetter<T> implements TypedEvent<T> {
     listener: TypedEventListener<T>
   ): void {
     const { database } = this;
-    const indexOfListener = database.findIndex(
-      (record) => record.listener == listener
-    );
-    const listenerWasNotAdded = indexOfListener == -1;
-    if (listenerWasNotAdded) return;
-    database.splice(indexOfListener, 1);
+    const index = database.findIndex((record) => record.listener == listener);
+    if (index >= 0) database.splice(index, 1);
   }
 }
 
