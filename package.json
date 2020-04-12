@@ -37,15 +37,15 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.2.1",
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
-    "@typescript-eslint/parser": "^2.26.0",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.8.2",
-    "jest": "^25.2.7",
-    "prettier": "^2.0.2",
+    "jest": "^25.3.0",
+    "prettier": "^2.0.4",
     "ts-jest": "^25.3.1",
-    "typedoc": "^0.17.3",
+    "typedoc": "^0.17.4",
     "typescript": "^3.8.3"
   }
 }
