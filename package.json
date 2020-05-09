@@ -17,7 +17,7 @@
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
     "docs": "typedoc --out docs --excludeNotExported",
     "prepare": "npm run build",
-    "preview-package-contents": "npm run prepare && npm pack --dry-run"
+    "preview-package-contents": "npm pack --dry-run"
   },
   "keywords": [
     "event",
