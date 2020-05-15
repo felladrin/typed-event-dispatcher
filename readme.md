@@ -15,12 +15,21 @@ A [lightweight](https://bundlephobia.com/result?p=typed-event-dispatcher), [full
 npm install typed-event-dispatcher
 ```
 
-```js
+```ts
 // Import as an ES Module.
 import { TypedEventDispatcher } from "typed-event-dispatcher";
+```
 
+```js
 // Or require as a CommonJS Module.
 const { TypedEventDispatcher } = require("typed-event-dispatcher");
+```
+
+```html
+<!-- Or use it directly in the browser. -->
+<script type="module">
+  import { TypedEventDispatcher } from "https://unpkg.com/typed-event-dispatcher?module";
+</script>
 ```
 
 ```ts

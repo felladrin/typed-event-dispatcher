@@ -128,6 +128,14 @@ test("removeListener() should be executed with no problem if listener wasn't fin
   }).not.toThrowError();
 });
 
+test("removeListener() should ignore removal of unregistered listeners", () => {
+  app.onServerStarted.addListener(listener);
+  const unregisteredListener = jest.fn();
+  expect(() => {
+    app.onServerStarted.removeListener(unregisteredListener);
+  }).not.toThrowError();
+});
+
 test("typed event getter should have methods to add and remove listeners", () => {
   expect(app.onServerStarted).toHaveProperty("addListener");
   expect(app.onServerStarted).toHaveProperty("removeListener");
