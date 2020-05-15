@@ -1,7 +1,5 @@
-node_modules
-typed-event-dispatcher.d.ts
-typed-event-dispatcher.js
-typed-event-dispatcher.test.d.ts
-typed-event-dispatcher.test.js
-docs
-coverage
+/node_modules/
+/dist/
+/docs/
+/coverage/
+/.cache/

@@ -32,8 +32,9 @@ function removeListener<T>(
   database: TypedEventDispatcherDatabase<T>,
   listener: TypedEventListener<T>
 ): void {
-  const index = database.findIndex((record) => record.listener == listener);
-  if (index >= 0) database.splice(index, 1);
+  for (let index = database.length - 1; index >= 0; index--) {
+    if (database[index].listener == listener) database.splice(index, 1);
+  }
 }
 
 function dispatch<T>(database: TypedEventDispatcherDatabase<T>, data: T): void {

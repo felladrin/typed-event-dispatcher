@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
-    "module": "commonjs",
+    "target": "ES5",
+    "module": "UMD",
+    "outDir": "dist",
+    "moduleResolution": "Node",
     "declaration": true,
     "strict": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "types": ["jest"]
+  },
+  "include": ["src/typed-event-dispatcher.ts"]
 }
