@@ -27,8 +27,9 @@ const { TypedEventDispatcher } = require("typed-event-dispatcher");
 
 ```html
 <!-- Or use it directly in the browser. -->
-<script type="module">
-  import { TypedEventDispatcher } from "https://unpkg.com/typed-event-dispatcher?module";
+<script src="https://unpkg.com/typed-event-dispatcher"></script>
+<script>
+  const { TypedEventDispatcher } = window["typed-event-dispatcher"];
 </script>
 ```
 
