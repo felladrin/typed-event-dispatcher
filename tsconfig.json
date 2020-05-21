@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "UMD",
+    "target": "ESNext",
     "outDir": "dist",
     "moduleResolution": "Node",
     "declaration": true,
