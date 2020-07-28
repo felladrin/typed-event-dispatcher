@@ -93,5 +93,5 @@ Check also the [Online Documentation](https://felladrin.github.io/typed-event-di
 
 Although all you need to know is only two definitions:
 
-- [`TypedEventDispatcher<T>`](https://www.victornogueira.app/typed-event-dispatcher/classes/_typed_event_dispatcher_.typedeventdispatcher.html)
-- [`TypedEvent<T>`](https://www.victornogueira.app/typed-event-dispatcher/modules/_typed_event_dispatcher_.html#typedevent)
+- [`TypedEventDispatcher<T>`](https://felladrin.github.io/typed-event-dispatcher/classes/_typed_event_dispatcher_.typedeventdispatcher.html)
+- [`TypedEvent<T>`](https://felladrin.github.io/typed-event-dispatcher/modules/_typed_event_dispatcher_.html#typedevent)
