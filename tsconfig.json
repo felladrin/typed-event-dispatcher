@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES5",
     "moduleResolution": "node",
-    "module": "esnext",
+    "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["jest"]
   },
-  "include": ["src/typed-event-dispatcher.ts"]
+  "include": ["src"]
 }
