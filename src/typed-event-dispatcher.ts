@@ -24,7 +24,7 @@ function addListener<T>(
   listener: TypedEventListener<T>,
   listenOnlyOnce?: boolean
 ): void {
-  if (!database.some((record) => record.listener == listener))
+  if (!database.some((record) => record.listener === listener))
     database.unshift({ listener: listener, listenOnlyOnce: listenOnlyOnce });
 }
 
@@ -33,7 +33,7 @@ function removeListener<T>(
   listener: TypedEventListener<T>
 ): void {
   for (let index = database.length - 1; index >= 0; index--) {
-    if (database[index].listener == listener) database.splice(index, 1);
+    if (database[index].listener === listener) database.splice(index, 1);
   }
 }
 
