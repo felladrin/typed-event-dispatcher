@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "outDir": "dist",
-    "moduleResolution": "Node",
-    "declaration": true,
+    "target": "ES5",
+    "moduleResolution": "node",
+    "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["jest"]
   },
-  "include": ["src/typed-event-dispatcher.ts"]
+  "include": ["src"]
 }
