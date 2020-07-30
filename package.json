@@ -8,6 +8,7 @@
   "module": "dist/typed-event-dispatcher.esm.js",
   "unpkg": "dist/typed-event-dispatcher.umd.production.min.js",
   "files": [
+    "src/typed-event-dispatcher.ts",
     "dist",
     "readme-too.md"
   ],
