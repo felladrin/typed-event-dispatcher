@@ -19,7 +19,8 @@
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
     "docs": "typedoc --out docs --excludeNotExported",
     "prepare": "npm run build",
-    "preview-package-contents": "npm pack --dry-run"
+    "preview-package-contents": "npm pack --dry-run",
+    "update-dependencies": "ncu -u && npm i && npm run test && npm run docs"
   },
   "keywords": [
     "event",
@@ -39,19 +40,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^25.2.3",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
-    "@typescript-eslint/parser": "^2.34.0",
-    "eslint": "^7.5.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.13.1",
+    "@types/jest": "^26.0.9",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0",
     "husky": "^4.2.5",
+    "npm-check-updates": "^7.1.0",
     "nve": "^13.0.0",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "tsdx": "^0.13.2",
-    "typedoc": "^0.17.7",
-    "typescript": "^3.9.3"
+    "typedoc": "^0.18.0",
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {
