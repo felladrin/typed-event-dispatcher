@@ -25,6 +25,11 @@ import { TypedEventDispatcher } from "typed-event-dispatcher";
 const { TypedEventDispatcher } = require("typed-event-dispatcher");
 ```
 
+```ts
+// Or import it from URL.
+import { TypedEventDispatcher } from "https://esm.sh/typed-event-dispatcher";
+```
+
 ```html
 <!-- Or use it directly in the browser. -->
 <script src="https://unpkg.com/typed-event-dispatcher"></script>
