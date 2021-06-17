@@ -53,7 +53,7 @@ export class TypedEventDispatcher<T = void> {
     this.getter = {
       addListener: (
         listener: TypedEventListener<T>,
-        listenOnlyOnce = false
+        listenOnlyOnce?: boolean
       ): void => addListener(database, listener, listenOnlyOnce),
       removeListener: (listener: TypedEventListener<T>): void =>
         removeListener(database, listener),
