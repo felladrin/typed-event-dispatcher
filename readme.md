@@ -9,11 +9,13 @@ Strongly-typed events that can be publicly listened but internally-only dispatch
 
 A [lightweight](https://bundlephobia.com/result?p=typed-event-dispatcher), [fully-tested](https://coveralls.io/github/felladrin/typed-event-dispatcher) and [dependency-free](https://www.npmjs.com/package/typed-event-dispatcher) lib made for Typescript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
 
-## Getting Started
+## Install
 
 ```sh
 npm install typed-event-dispatcher
 ```
+
+## Import
 
 ```ts
 // Import as an ES Module.
@@ -37,6 +39,8 @@ import { TypedEventDispatcher } from "https://esm.sh/typed-event-dispatcher";
   const { TypedEventDispatcher } = window["typed-event-dispatcher"];
 </script>
 ```
+
+## Usage
 
 ```ts
 class Counter {
@@ -88,6 +92,26 @@ class Example {
 }
 
 new Example().start();
+```
+
+And here's a simplified version of the example above:
+
+```js
+function createCounter() {
+  let count = 0;
+  const { dispatch, getter } = new TypedEventDispatcher(count);
+  const increaseCount = () => dispatch(++count);
+  return { increaseCount, countIncreasedEvent: getter };
+}
+
+function startExample() {
+  const { increaseCount, countIncreasedEvent } = createCounter();
+  console.log("Starting count...");
+  countIncreasedEvent.addListener((count) => console.log(`Count increased to ${count}.`));
+  setInterval(increaseCount, 1000); 
+}
+
+startExample();
 ```
 
 ## Further Reading
