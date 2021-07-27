@@ -44,14 +44,10 @@ import { TypedEventDispatcher } from "https://esm.sh/typed-event-dispatcher";
 
 ```ts
 class Counter {
-  //--------------------------------------------//
-  // STEP 1: Create a private event dispatcher. //
-  //--------------------------------------------//
+  // 1️⃣ Create a private event dispatcher.
   private onCountIncreasedDispatcher = new TypedEventDispatcher<number>();
 
-  //---------------------------------------//
-  // STEP 2: Create a public event getter. //
-  //---------------------------------------//
+  // 2️⃣ Create a public event getter.
   public get onCountIncreased() {
     return this.onCountIncreasedDispatcher.getter;
   }
@@ -60,9 +56,7 @@ class Counter {
     setInterval(() => {
       this.increaseCount();
 
-      //----------------------------------------------------------//
-      // STEP 3: Dispatch the event so listeners can react to it. //
-      //----------------------------------------------------------//
+      // 3️⃣ Dispatch the event so listeners can react to it.
       this.onCountIncreasedDispatcher.dispatch(this.count);
     }, 1000);
   }
@@ -80,9 +74,7 @@ class Example {
   public start() {
     console.log("Starting count...");
 
-    //-------------------------------------------------------//
-    // STEP 4: Listen to events dispatched by other classes. //
-    //-------------------------------------------------------//
+    // 4️⃣ Listen to events dispatched by other classes.
     this.counter.onCountIncreased.addListener((count) => {
       console.log(`Count increased to ${count}.`);
     });
@@ -107,8 +99,10 @@ function createCounter() {
 function startExample() {
   const { increaseCount, countIncreasedEvent } = createCounter();
   console.log("Starting count...");
-  countIncreasedEvent.addListener((count) => console.log(`Count increased to ${count}.`));
-  setInterval(increaseCount, 1000); 
+  countIncreasedEvent.addListener((count) =>
+    console.log(`Count increased to ${count}.`)
+  );
+  setInterval(increaseCount, 1000);
 }
 
 startExample();
@@ -122,5 +116,5 @@ Check also the [Online Documentation](https://felladrin.github.io/typed-event-di
 
 Although all you need to know is only two definitions:
 
-- [`TypedEventDispatcher<T>`](https://felladrin.github.io/typed-event-dispatcher/classes/_typed_event_dispatcher_.typedeventdispatcher.html)
-- [`TypedEvent<T>`](https://felladrin.github.io/typed-event-dispatcher/modules/_typed_event_dispatcher_.html#typedevent)
+- [`TypedEventDispatcher`](https://felladrin.github.io/typed-event-dispatcher/classes/TypedEventDispatcher.html)
+- [`TypedEvent`](https://felladrin.github.io/typed-event-dispatcher/modules.html#TypedEvent)

@@ -1,4 +1,7 @@
-import { TypedEventDispatcher, TypedEvent } from "./typed-event-dispatcher";
+import {
+  TypedEventDispatcher,
+  TypedEvent,
+} from "../src/typed-event-dispatcher";
 
 type Player = {
   name: string;
