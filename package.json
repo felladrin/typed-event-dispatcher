@@ -7,6 +7,11 @@
   "types": "dist/typed-event-dispatcher.d.ts",
   "module": "dist/typed-event-dispatcher.esm.js",
   "unpkg": "dist/typed-event-dispatcher.umd.production.min.js",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/typed-event-dispatcher.esm.js",
+    "browser": "./dist/typed-event-dispatcher.umd.production.min.js"
+  },
   "files": [
     "src/typed-event-dispatcher.ts",
     "dist",
@@ -19,7 +24,7 @@
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
     "docs": "typedoc src --out docs",
     "prepare": "npm run build",
-    "preview-package-contents": "npm pack --dry-run",
+    "preview-package-contents": "package-check && npm pack --dry-run",
     "update-dependencies": "ncu -u && npm i && npm run test && npm run docs"
   },
   "keywords": [
@@ -40,6 +45,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@skypack/package-check": "^0.2.2",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.3",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
