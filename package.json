@@ -23,7 +23,7 @@
     "lint": "tsdx lint src --fix",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
     "docs": "typedoc src --out docs",
-    "prepare": "npm run build",
+    "prepare": "husky install && npm run build",
     "preview-package-contents": "package-check && npm pack --dry-run",
     "update-dependencies": "ncu -u && npm i && npm run test && npm run docs"
   },
@@ -61,11 +61,6 @@
     "tsdx": "^0.14.1",
     "typedoc": "^0.21.4",
     "typescript": "^4.3.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged && npm run lint"
-    }
   },
   "browserslist": [
     "defaults"
