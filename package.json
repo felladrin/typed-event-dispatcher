@@ -54,7 +54,7 @@
     "eslint-config-react-app": "6.0.0",
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-jest": "24.4.0",
-    "husky": "7.0.1",
+    "husky": "7.0.4",
     "npm-check-updates": "11.8.3",
     "nve": "14.0.0",
     "prettier": "2.3.2",
