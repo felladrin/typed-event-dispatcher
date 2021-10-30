@@ -23,13 +23,6 @@ jobs:
           node-version: "14"
       - name: Install dependencies
         run: npm ci
-      - name: Lint project
-        run: npm run lint
-      - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4.12.0
-        with:
-          commit_message: Fix lint issues
-          branch: ${{ github.head_ref }}
       - name: Format files
         run: npm run format
       - name: Push changes
