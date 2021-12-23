@@ -45,7 +45,7 @@
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
     "@types/jest": "27.0.3",
-    "@types/node": "16.11.14",
+    "@types/node": "16.11.16",
     "husky": "7.0.4",
     "nve": "14.0.0",
     "prettier": "2.5.1",
