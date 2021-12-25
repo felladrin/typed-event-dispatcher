@@ -17,6 +17,7 @@
     "dist",
     "readme-too.md"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsdx build --format cjs,esm,umd --name typed-event-dispatcher --entry src/typed-event-dispatcher.ts",
     "test": "nve latest,lts tsdx test --collectCoverage",
