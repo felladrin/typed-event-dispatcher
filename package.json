@@ -28,12 +28,13 @@
   },
   "keywords": [
     "event",
+    "events",
     "dispatcher",
-    "signal",
     "emitter",
-    "strongly",
-    "typed",
-    "typescript"
+    "listener",
+    "listeners",
+    "event-emitter",
+    "subscribe"
   ],
   "homepage": "https://felladrin.github.io/typed-event-dispatcher/index.html",
   "repository": "github:felladrin/typed-event-dispatcher",
