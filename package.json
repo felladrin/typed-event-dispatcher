@@ -59,9 +59,5 @@
   },
   "browserslist": [
     "defaults"
-  ],
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  }
+  ]
 }
