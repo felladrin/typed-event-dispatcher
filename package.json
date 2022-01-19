@@ -48,7 +48,6 @@
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
     "@types/jest": "27.4.0",
-    "@types/node": "16.11.21",
     "husky": "7.0.4",
     "jest": "27.4.7",
     "microbundle": "0.14.2",
