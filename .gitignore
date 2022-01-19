@@ -1,5 +1,8 @@
-/node_modules/
+node_modules
+.DS_Store
+*-lock.*
+*.lock
+*.log
 /dist/
 /docs/
 /coverage/
-/.cache/
