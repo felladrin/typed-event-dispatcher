@@ -12,7 +12,7 @@ jobs:
         env:
           HUSKY_SKIP_INSTALL: 1
         run: |
-          npm ci
+          npm install
           npm run docs
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
