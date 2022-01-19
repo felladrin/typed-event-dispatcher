@@ -2,25 +2,26 @@
   "name": "typed-event-dispatcher",
   "version": "1.11.5",
   "description": "Strongly-typed events that can be publicly listened but internally-only dispatched.",
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "types": "dist/typed-event-dispatcher.d.ts",
-  "module": "dist/typed-event-dispatcher.esm.js",
-  "unpkg": "dist/typed-event-dispatcher.umd.production.min.js",
+  "source": "./src/typed-event-dispatcher.ts",
+  "types": "./dist/typed-event-dispatcher.d.ts",
+  "main": "./dist/typed-event-dispatcher.js",
+  "module": "./dist/typed-event-dispatcher.module.js",
+  "unpkg": "./dist/typed-event-dispatcher.umd.js",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/typed-event-dispatcher.esm.js",
-    "browser": "./dist/typed-event-dispatcher.umd.production.min.js"
+    "browser": "./dist/typed-event-dispatcher.module.js",
+    "umd": "./dist/typed-event-dispatcher.umd.js",
+    "import": "./dist/typed-event-dispatcher.modern.js",
+    "require": "./dist/typed-event-dispatcher.js",
+    "default": "./dist/typed-event-dispatcher.module.js"
   },
   "files": [
-    "src/typed-event-dispatcher.ts",
     "dist",
     "readme-too.md"
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsdx build --format cjs,esm,umd --name typed-event-dispatcher --entry src/typed-event-dispatcher.ts",
-    "test": "nve latest,lts tsdx test --collectCoverage",
+    "build": "microbundle src/typed-event-dispatcher.ts --name typed-event-dispatcher --sourcemap false",
+    "test": "jest --collectCoverage",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
     "docs": "typedoc src/typed-event-dispatcher.ts",
     "prepare": "husky install && npm run build",
@@ -46,17 +47,22 @@
   "license": "MIT",
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
-    "@types/jest": "27.4.0",
+    "@types/jest": "^27.4.0",
     "@types/node": "16.11.21",
     "husky": "7.0.4",
-    "nve": "14.0.0",
+    "jest": "^27.4.7",
+    "microbundle": "^0.14.2",
     "prettier": "2.5.1",
     "pretty-quick": "3.1.3",
-    "tsdx": "0.14.1",
+    "ts-jest": "^27.1.3",
     "typedoc": "0.22.11",
     "typescript": "4.5.4"
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
 }
