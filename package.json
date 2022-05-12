@@ -47,7 +47,7 @@
   "license": "MIT",
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
-    "@types/jest": "27.5.0",
+    "@types/jest": "27.5.1",
     "husky": "8.0.1",
     "jest": "28.1.0",
     "microbundle": "0.15.0",
