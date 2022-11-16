@@ -9,7 +9,7 @@ Strongly-typed events that can be publicly listened but internally-only dispatch
 
 A [lightweight](https://bundlephobia.com/result?p=typed-event-dispatcher), [fully-tested](https://coveralls.io/github/felladrin/typed-event-dispatcher) and [dependency-free](https://www.npmjs.com/package/typed-event-dispatcher) lib made for Typescript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
 
-This was made with Object-oriented Programming in mind. If you prefer Functional Programming, please check [Create PubSub](https://www.npmjs.com/package/create-pubsub).
+This was made with Object-oriented Programming in mind. If you prefer Functional Programming, please check [create-pubsub](https://www.npmjs.com/package/create-pubsub).
 
 ## Install
 
