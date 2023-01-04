@@ -1,6 +1,6 @@
 {
   "name": "typed-event-dispatcher",
-  "version": "1.11.5",
+  "version": "1.11.6",
   "description": "Strongly-typed events that can be publicly listened but internally-only dispatched.",
   "source": "./src/typed-event-dispatcher.ts",
   "types": "./dist/typed-event-dispatcher.d.ts",
