@@ -95,8 +95,3 @@ new Example().start();
 For more details about how to use this lib, please refer to the [Usage Overview](./readme-too.md).
 
 Check also the [Online Documentation](https://felladrin.github.io/typed-event-dispatcher/index.html). Or generate it locally by running `npm run docs`.
-
-Although all you need to know is only two definitions:
-
-- [`TypedEventDispatcher`](https://felladrin.github.io/typed-event-dispatcher/classes/TypedEventDispatcher.html)
-- [`TypedEvent`](https://felladrin.github.io/typed-event-dispatcher/modules.html#TypedEvent)
