@@ -3,7 +3,6 @@
 [![NPM Version](https://img.shields.io/npm/v/typed-event-dispatcher.svg?style=flat)](https://www.npmjs.org/package/typed-event-dispatcher)
 [![Size](https://img.shields.io/bundlephobia/minzip/typed-event-dispatcher)](https://bundlephobia.com/package/typed-event-dispatcher)
 [![Types](https://img.shields.io/npm/types/typed-event-dispatcher)](https://www.jsdocs.io/package/typed-event-dispatcher#package-index)
-[![Known Vulnerabilities](https://snyk.io/test/npm/typed-event-dispatcher/badge.svg)](https://snyk.io/test/npm/typed-event-dispatcher)
 [![Coverage Status](https://coveralls.io/repos/github/felladrin/typed-event-dispatcher/badge.svg?branch=master)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
 [![License](https://img.shields.io/github/license/felladrin/typed-event-dispatcher)](http://victor.mit-license.org/)
 
