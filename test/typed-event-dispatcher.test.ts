@@ -119,9 +119,12 @@ test("removeListener() should remove the listener, so next time the event is dis
     app.dispatchServerStarted();
   }, times);
   app.onServerStarted.removeListener(listener);
-  repeatFunction(() => {
-    app.dispatchServerStarted();
-  }, pickRandomIntInclusive(1, 5));
+  repeatFunction(
+    () => {
+      app.dispatchServerStarted();
+    },
+    pickRandomIntInclusive(1, 5),
+  );
   expect(listener).toBeCalledTimes(times);
 });
 
