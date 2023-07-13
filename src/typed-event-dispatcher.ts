@@ -22,7 +22,7 @@ type TypedEventDispatcherDatabase<T> = {
 function addListener<T>(
   database: TypedEventDispatcherDatabase<T>,
   listener: TypedEventListener<T>,
-  listenOnlyOnce?: boolean
+  listenOnlyOnce?: boolean,
 ): void {
   if (!database.some((record) => record.listener === listener))
     database.unshift({ listener: listener, listenOnlyOnce: listenOnlyOnce });
@@ -30,7 +30,7 @@ function addListener<T>(
 
 function removeListener<T>(
   database: TypedEventDispatcherDatabase<T>,
-  listener: TypedEventListener<T>
+  listener: TypedEventListener<T>,
 ): void {
   for (let index = database.length - 1; index >= 0; index--) {
     if (database[index].listener === listener) database.splice(index, 1);
@@ -53,7 +53,7 @@ export class TypedEventDispatcher<T = void> {
     this.getter = {
       addListener: (
         listener: TypedEventListener<T>,
-        listenOnlyOnce?: boolean
+        listenOnlyOnce?: boolean,
       ): void => addListener(database, listener, listenOnlyOnce),
       removeListener: (listener: TypedEventListener<T>): void =>
         removeListener(database, listener),
