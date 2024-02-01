@@ -48,7 +48,7 @@
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
     "@types/jest": "29.5.12",
-    "husky": "9.0.7",
+    "husky": "9.0.10",
     "jest": "29.7.0",
     "microbundle": "0.15.1",
     "prettier": "3.2.4",
