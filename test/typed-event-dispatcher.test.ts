@@ -83,7 +83,7 @@ test("addListener() called without the second parameter should call the listener
   repeatFunction(() => {
     app.dispatchServerStarted();
   }, times);
-  expect(listener).toBeCalledTimes(times);
+  expect(listener).toHaveBeenCalledTimes(times);
 });
 
 test('addListener() called with the second parameter set to "false" should call the listener more than once, when the event is dispatched more than once', () => {
@@ -92,7 +92,7 @@ test('addListener() called with the second parameter set to "false" should call 
   repeatFunction(() => {
     app.dispatchServerStarted();
   }, times);
-  expect(listener).toBeCalledTimes(times);
+  expect(listener).toHaveBeenCalledTimes(times);
 });
 
 test('addListener() called with the second parameter set to "true" should call the listener only once, when the event is dispatched more than once', () => {
@@ -101,7 +101,7 @@ test('addListener() called with the second parameter set to "true" should call t
   repeatFunction(() => {
     app.dispatchServerStarted();
   }, times);
-  expect(listener).toBeCalledTimes(1);
+  expect(listener).toHaveBeenCalledTimes(1);
 });
 
 test("should ignore multiple additions of the same listener, so each unique listener can be added only once", () => {
@@ -109,7 +109,7 @@ test("should ignore multiple additions of the same listener, so each unique list
   app.onServerStarted.addListener(listener);
   app.onServerStarted.addListener(listener);
   app.dispatchServerStarted();
-  expect(listener).toBeCalledTimes(1);
+  expect(listener).toHaveBeenCalledTimes(1);
 });
 
 test("removeListener() should remove the listener, so next time the event is dispatched, it won't call the listener", () => {
@@ -125,13 +125,13 @@ test("removeListener() should remove the listener, so next time the event is dis
     },
     pickRandomIntInclusive(1, 5),
   );
-  expect(listener).toBeCalledTimes(times);
+  expect(listener).toHaveBeenCalledTimes(times);
 });
 
 test("removeListener() should be executed with no problem if listener wasn't find in the list of current registered listeners", () => {
   expect(() => {
     app.onServerStarted.removeListener(listener);
-  }).not.toThrowError();
+  }).not.toThrow();
 });
 
 test("removeListener() should ignore removal of unregistered listeners", () => {
@@ -139,7 +139,7 @@ test("removeListener() should ignore removal of unregistered listeners", () => {
   const unregisteredListener = jest.fn();
   expect(() => {
     app.onServerStarted.removeListener(unregisteredListener);
-  }).not.toThrowError();
+  }).not.toThrow();
 });
 
 test("typed event getter should have methods to add and remove listeners", () => {
