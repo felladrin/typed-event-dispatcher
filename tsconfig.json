@@ -7,8 +7,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "types": ["jest"],
-    "ignoreDeprecations": "6.0"
+    "types": ["jest"]
   },
   "exclude": ["examples"]
 }
