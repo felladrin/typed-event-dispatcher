@@ -5,14 +5,14 @@
   "source": "./src/typed-event-dispatcher.ts",
   "types": "./dist/typed-event-dispatcher.d.ts",
   "main": "./dist/typed-event-dispatcher.js",
-  "module": "./dist/typed-event-dispatcher.module.js",
-  "unpkg": "./dist/typed-event-dispatcher.umd.js",
+  "module": "./dist/typed-event-dispatcher.mjs",
+  "unpkg": "./dist/typed-event-dispatcher.global.js",
   "exports": {
-    "browser": "./dist/typed-event-dispatcher.module.js",
-    "umd": "./dist/typed-event-dispatcher.umd.js",
-    "import": "./dist/typed-event-dispatcher.modern.js",
+    "browser": "./dist/typed-event-dispatcher.mjs",
+    "umd": "./dist/typed-event-dispatcher.global.js",
+    "import": "./dist/typed-event-dispatcher.mjs",
     "require": "./dist/typed-event-dispatcher.js",
-    "default": "./dist/typed-event-dispatcher.module.js"
+    "default": "./dist/typed-event-dispatcher.mjs"
   },
   "files": [
     "dist",
@@ -20,11 +20,11 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "microbundle src/typed-event-dispatcher.ts --name typed-event-dispatcher --sourcemap false",
+    "build": "tsup src/typed-event-dispatcher.ts --format cjs,esm,iife --global-name typedEventDispatcher --clean --dts",
     "test": "jest --collectCoverage",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
     "docs": "typedoc src/typed-event-dispatcher.ts",
-    "prepare": "husky install && npm run build",
+    "prepare": "husky && npm run build",
     "preview-package-contents": "package-check && npm pack --dry-run"
   },
   "keywords": [
@@ -50,9 +50,9 @@
     "@types/jest": "30.0.0",
     "husky": "9.1.7",
     "jest": "30.3.0",
-    "microbundle": "0.15.1",
     "prettier": "3.8.1",
     "ts-jest": "29.4.6",
+    "tsup": "8.4.0",
     "typedoc": "0.28.18",
     "typescript": "6.0.2"
   }
