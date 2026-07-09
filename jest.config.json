@@ -1,4 +1,7 @@
 {
-  "preset": "ts-jest",
-  "testEnvironment": "node"
+  "testEnvironment": "node",
+  "transform": {
+    "^.+\\.tsx?$": "babel-jest"
+  },
+  "transformIgnorePatterns": ["/node_modules/(?!(.*\\.mjs$))"]
 }
