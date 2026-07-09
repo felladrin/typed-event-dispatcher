@@ -23,7 +23,7 @@
     "build": "tsup src/typed-event-dispatcher.ts --format cjs,esm,iife --global-name typedEventDispatcher --clean && tsc --emitDeclarationOnly --outDir dist",
     "test": "jest --collectCoverage",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --ignore-path \".eslintignore\"",
-    "docs": "npx --yes --package=typescript@6.0.3 --package=typedoc@0.28.20 typedoc src/typed-event-dispatcher.ts",
+    "docs": "bash scripts/generate-docs.sh",
     "prepare": "husky && npm run build",
     "preview-package-contents": "package-check && npm pack --dry-run"
   },
