@@ -2,12 +2,11 @@
 
 [![NPM Version](https://img.shields.io/npm/v/typed-event-dispatcher.svg?style=flat)](https://www.npmjs.org/package/typed-event-dispatcher)
 [![Types](https://img.shields.io/npm/types/typed-event-dispatcher)](https://www.jsdocs.io/package/typed-event-dispatcher#package-index)
-[![Coverage Status](https://coveralls.io/repos/github/felladrin/typed-event-dispatcher/badge.svg?branch=master)](https://coveralls.io/github/felladrin/typed-event-dispatcher?branch=master)
 [![License](https://img.shields.io/github/license/felladrin/typed-event-dispatcher)](http://victor.mit-license.org/)
 
 Strongly-typed events that can be publicly listened but internally-only dispatched.
 
-A [lightweight](https://bundlephobia.com/result?p=typed-event-dispatcher), [fully-tested](https://coveralls.io/github/felladrin/typed-event-dispatcher) and [dependency-free](https://www.npmjs.com/package/typed-event-dispatcher) lib made for Typescript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
+A [lightweight](https://bundlephobia.com/result?p=typed-event-dispatcher), [fully-tested](https://github.com/felladrin/typed-event-dispatcher/blob/master/test/typed-event-dispatcher.test.ts) and [dependency-free](https://www.npmjs.com/package/typed-event-dispatcher) lib made for Typescript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-typescript-example)) and JavaScript ([see live example](https://repl.it/@victornogueira/typed-event-dispatcher-javascript-example)) codebases.
 
 This is intended to be used with Classes. If you prefer using only Functions, please check [create-pubsub](https://www.npmjs.com/package/create-pubsub).
 
