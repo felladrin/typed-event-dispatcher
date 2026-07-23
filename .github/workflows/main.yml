@@ -45,15 +45,5 @@ jobs:
         run: npm ci
       - name: Build project
         run: npm run build
-      - name: Test and collect coverage info
+      - name: Run tests
         run: npm run test
-      - name: Coveralls Parallel
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel: true
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel-finished: true
